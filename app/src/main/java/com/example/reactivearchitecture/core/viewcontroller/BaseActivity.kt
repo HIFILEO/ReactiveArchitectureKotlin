@@ -27,6 +27,6 @@ import com.example.reactivearchitecture.core.dagger.Injectable
  * Base class for all [AppCompatActivity].
  */
 abstract class BaseActivity : AppCompatActivity(), Injectable {
-    //Note - injection is no longer needed here. It's handled by the AppInjector with lifecycle
-    //callbacks.
+    // Note - injection is no longer needed here. It's handled by the AppInjector with lifecycle
+    // callbacks.
 }
