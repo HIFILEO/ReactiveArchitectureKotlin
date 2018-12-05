@@ -17,23 +17,16 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.viewcontroller;
+package com.example.reactivearchitecture.core.viewcontroller
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity
 
-import com.example.reactivearchitecture.core.dagger.Injectable;
+import com.example.reactivearchitecture.core.dagger.Injectable
 
 /**
- * Base class for all {@link AppCompatActivity}.
+ * Base class for all [AppCompatActivity].
  */
-public abstract class BaseActivity extends AppCompatActivity implements Injectable {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        //Note - injection is no longer needed here. It's handled by the AppInjector with lifecycle
-        //callbacks.
-        super.onCreate(savedInstanceState);
-    }
-
+abstract class BaseActivity : AppCompatActivity(), Injectable {
+    //Note - injection is no longer needed here. It's handled by the AppInjector with lifecycle
+    //callbacks.
 }
