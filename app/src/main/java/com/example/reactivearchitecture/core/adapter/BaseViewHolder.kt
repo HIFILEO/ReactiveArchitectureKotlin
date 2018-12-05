@@ -17,21 +17,12 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.adapter;
+package com.example.reactivearchitecture.core.adapter
 
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.support.v7.widget.RecyclerView
+import android.view.View
 
 /**
- * Base class for {@link android.support.v7.widget.RecyclerView.ViewHolder}.
+ * Base class for [android.support.v7.widget.RecyclerView.ViewHolder].
  */
-public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
-
-    /**
-     * Constructor.
-     * @param itemView -
-     */
-    public BaseViewHolder(View itemView) {
-        super(itemView);
-    }
-}
+abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
