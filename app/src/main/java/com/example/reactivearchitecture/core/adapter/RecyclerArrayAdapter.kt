@@ -17,61 +17,54 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.adapter;
+package com.example.reactivearchitecture.core.adapter
 
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
+import java.util.Collections
+import java.util.Comparator
 /**
  * Array adapter for Recycler view. The ArrayAdapter for list view cannot be used.
  * Inspiration from:
  * https://gist.github.com/passsy/f8eecc97c37e3de46176
  *
- * @param <T> -
- * @param <V> -
+ * @param <T> - Data Type
+ * @param <V> - View Holder
+ * @property objectList - mutable list of Data Type <T>
+ * @constructor Creates an adapter backed by the data <T>
  */
-public abstract class RecyclerArrayAdapter<T, V extends RecyclerView.ViewHolder>
-        extends RecyclerView.Adapter<V> {
-
-    private List<T> objectList;
-
-    public RecyclerArrayAdapter(final List<T> objects) {
-        this.objectList = objects;
-    }
+abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
+(private var objectList: MutableList<T>?) : RecyclerView.Adapter<V>() {
 
     /**
      * Adds the specified object at the end of the array.
      *
      * @param object The object to add at the end of the array.
      */
-    public void add(final T object) {
-        objectList.add(object);
-        notifyItemInserted(getItemCount() - 1);
+    fun add(`object`: T) {
+        objectList!!.add(`object`)
+        notifyItemInserted(itemCount - 1)
     }
 
     /**
      * Remove all elements from the list.
      */
-    public void clear() {
-        final int size = getItemCount();
-        objectList.clear();
-        notifyItemRangeRemoved(0, size);
+    fun clear() {
+        val size = itemCount
+        objectList!!.clear()
+        notifyItemRangeRemoved(0, size)
     }
 
-    @Override
-    public int getItemCount() {
-        return objectList.size();
+    override fun getItemCount(): Int {
+        return objectList!!.size
     }
 
-    public T getItem(final int position) {
-        return objectList.get(position);
+    fun getItem(position: Int): T {
+        return objectList!![position]
     }
 
-    public long getItemId(final int position) {
-        return position;
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     /**
@@ -80,20 +73,19 @@ public abstract class RecyclerArrayAdapter<T, V extends RecyclerView.ViewHolder>
      * @param item The item to retrieve the position of.
      * @return The position of the specified item.
      */
-    public int getPosition(final T item) {
-        return objectList.indexOf(item);
+    fun getPosition(item: T): Int {
+        return objectList!!.indexOf(item)
     }
 
     /**
      * Inserts the specified object at the specified index in the array.
      *
      * @param object The object to insert into the array.
-     * @param index  The index at which the object must be inserted.
+     * @param index The index at which the object must be inserted.
      */
-    public void insert(final T object, int index) {
-        objectList.add(index, object);
-        notifyItemInserted(index);
-
+    fun insert(`object`: T, index: Int) {
+        objectList!!.add(index, `object`)
+        notifyItemInserted(index)
     }
 
     /**
@@ -101,10 +93,10 @@ public abstract class RecyclerArrayAdapter<T, V extends RecyclerView.ViewHolder>
      *
      * @param object The object to remove.
      */
-    public void remove(T object) {
-        final int position = getPosition(object);
-        objectList.remove(object);
-        notifyItemRemoved(position);
+    fun remove(`object`: T) {
+        val position = getPosition(`object`)
+        objectList!!.remove(`object`)
+        notifyItemRemoved(position)
     }
 
     /**
@@ -112,9 +104,9 @@ public abstract class RecyclerArrayAdapter<T, V extends RecyclerView.ViewHolder>
      *
      * @param comparator The comparator used to sort the objectList contained in this adapter.
      */
-    public void sort(Comparator<? super T> comparator) {
-        Collections.sort(objectList, comparator);
-        notifyItemRangeChanged(0, getItemCount());
+    fun sort(comparator: Comparator<in T>) {
+        Collections.sort(objectList, comparator)
+        notifyItemRangeChanged(0, itemCount)
     }
 
     /**
@@ -122,8 +114,8 @@ public abstract class RecyclerArrayAdapter<T, V extends RecyclerView.ViewHolder>
      *
      * @param newList - new list
      */
-    public void replace(List<T> newList) {
-        objectList = newList;
-        notifyDataSetChanged();
+    fun replace(newList: MutableList<T>) {
+        objectList = newList
+        notifyDataSetChanged()
     }
 }

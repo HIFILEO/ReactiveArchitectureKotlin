@@ -78,15 +78,22 @@ To run all espresso tests:
 
 There are style standards in this app as examples of how to maintain clean code.
 
-#### Checkstyle / KTLint
+#### Checkstyle
 
 To run all checkstyle:
 ./gradlew checkstyle
 
-To run all KTLint:
-./gradlew ktlint
+#### Ktlint-Gradle
 
-#### Lint
+We are using ktlint-gradle. https://github.com/JLLeitschuh/ktlint-gradle
+
+This is an expansion on https://github.com/shyiko/ktlint which is a kotlin checkstyle tool that
+uses the kotlin code standards laid down by intellij kotlinlang.org (includes android standards) 
+
+To run all KTLint:
+./gradlew ktlintCheck
+
+#### Android Lint
 
 To run all lint:
 ./gradlew lintDebug
@@ -94,7 +101,7 @@ To run all lint:
 #### Run All
 
 The following command works for API emulator version 25 (Pixel 2XL)
-./gradlew checkstyle ktlint lintDebug jacocoTestReport contractTest -Pcontract=true connectedDebugAndroidTest
+./gradlew checkstyle ktlintCheck lintDebug jacocoTestReport contractTest -Pcontract=true connectedDebugAndroidTest
 
 ## Resources
 
