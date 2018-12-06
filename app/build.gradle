@@ -5,7 +5,7 @@ apply from: '../gradle/contractTest.gradle'
 apply from: '../gradle/checkstyle.gradle'
 apply from: '../gradle/lint.gradle'
 apply from: '../gradle/jacoco.gradle'
-apply from: '../gradle/ktlint.gradle'
+apply from: '../gradle/ktlint-gradle.gradle'
 
 android {
     compileSdkVersion 28
@@ -116,7 +116,4 @@ dependencies {
     //Normally I don't include Guava, but needed for EspressoTestRule
     androidTestImplementation 'com.google.guava:guava:24.1-jre'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
 }

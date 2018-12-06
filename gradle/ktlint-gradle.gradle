@@ -1,0 +1,26 @@
+/*
+KtLint replaces checkstyle as an analysis tool to check for code style. It follows the standard
+set down by kotlinang.org.
+https://github.com/shyiko/ktlint
+
+KtLint-Gradle is a gradle plugin that works with KtLint. It means we don't need to write our own
+gradle task in order to run KtLint. It's a gradle plugin that automatically creates check and
+format tasks for project Kotlin sources, supports different kotlin plugins and Gradle build caching.
+
+Note - to change properties of a specific rule, look at .editorconfig file at the root of the project
+*/
+apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+ktlint {
+    version = "0.22.0"
+    debug = true
+    verbose = true
+    android = true
+    outputToConsole = true
+    reporters = [ReporterType.PLAIN, ReporterType.CHECKSTYLE]
+    ignoreFailures = false
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}

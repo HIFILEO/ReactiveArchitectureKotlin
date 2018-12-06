@@ -1,0 +1,10 @@
+#Note - you must put editorconfig files at the project root. You cannot specify location.
+#https://stackoverflow.com/questions/38502090/is-it-possible-to-put-an-editorconfig-file-not-at-the-top-level-root-dir
+
+# http://editorconfig.org
+#root = true
+
+
+[*.{kt,kts}]
+#Note - this is here as an example, max line 100 is already a part of kotlin style code.
+max_line_length=100
