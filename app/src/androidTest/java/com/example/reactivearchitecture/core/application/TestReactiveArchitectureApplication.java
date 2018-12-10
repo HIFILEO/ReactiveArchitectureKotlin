@@ -34,7 +34,7 @@ public class TestReactiveArchitectureApplication extends ReactiveArchitectureApp
     private TestApplicationComponent component;
 
     @Override
-    void setupComponent() {
+    public void setupComponent() {
         component = TestAppInjector.init(this);
     }
 
