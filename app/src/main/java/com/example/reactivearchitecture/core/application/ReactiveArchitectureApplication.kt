@@ -66,7 +66,7 @@ open class ReactiveArchitectureApplication : Application(), HasActivityInjector 
      * Setup the Dagger2 component graph. Must be called before [.onCreate]
      */
     @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    internal open fun setupComponent() {
+    open fun setupComponent() {
         if (component == null) {
             component = AppInjector.init(this)
         } else {
