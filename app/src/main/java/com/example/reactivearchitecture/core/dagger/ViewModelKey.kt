@@ -20,25 +20,24 @@ Inspired from:
 https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
  */
 
-package com.example.reactivearchitecture.core.dagger;
+package com.example.reactivearchitecture.core.dagger
 
-import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModel
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import kotlin.annotation.Retention
 
-import dagger.MapKey;
+import dagger.MapKey
+import kotlin.reflect.KClass
 
 /**
- * Sets an annotation so {@link ViewModel} are mapped to {@link dagger.android.AndroidInjection}.
+ * Sets an annotation so [ViewModel] are mapped to [dagger.android.AndroidInjection].
  */
-@Documented
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
+@MustBeDocumented
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY_GETTER,
+        AnnotationTarget.PROPERTY_SETTER
+)
+@Retention(AnnotationRetention.RUNTIME)
 @MapKey
-@interface ViewModelKey {
-    Class<? extends ViewModel> value();
-}
+internal annotation class ViewModelKey(val value: KClass<out ViewModel>)
