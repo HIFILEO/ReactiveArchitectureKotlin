@@ -17,45 +17,41 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.view;
+package com.example.reactivearchitecture.core.view
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.util.Log;
+import android.content.Context
+import android.graphics.Typeface
+import android.util.Log
 
-import java.util.Hashtable;
+import java.util.Hashtable
 
 /**
  * Typeface has issues, must use this class for loading fonts.
  */
-class Typefaces {
-    private static final String TAG = "Typefaces";
-    private static final Hashtable<String, Typeface> CACHE = new Hashtable<>();
-
-    private Typefaces() {
-
-    }
+internal object Typefaces {
+    private val TAG = "Typefaces"
+    private val CACHE = Hashtable<String, Typeface>()
 
     /**
      * Get one typeface per application.
      * @param context - context
      * @param assetPath - path to asset folder
-     * @return - The {@link Typeface} to use
+     * @return - The [Typeface] to use
      */
-    public static Typeface get(Context context, String assetPath) {
-        synchronized (CACHE) {
+    operator fun get(context: Context, assetPath: String): Typeface? {
+        synchronized(CACHE) {
             if (!CACHE.containsKey(assetPath)) {
                 try {
-                    Typeface typeface = Typeface.createFromAsset(context.getResources().getAssets(),
-                            assetPath);
-                    CACHE.put(assetPath, typeface);
-                } catch (Exception e) {
-                    Log.e(TAG, "Could not get typeface '" + assetPath
-                            + "' because " + e.getMessage());
-                    return null;
+                    val typeface = Typeface.createFromAsset(context.resources.assets,
+                            assetPath)
+                    CACHE[assetPath] = typeface
+                } catch (e: Exception) {
+                    Log.e(TAG, "Could not get typeface '" + assetPath +
+                            "' because " + e.message)
+                    return null
                 }
             }
-            return CACHE.get(assetPath);
+            return CACHE[assetPath]
         }
     }
 }

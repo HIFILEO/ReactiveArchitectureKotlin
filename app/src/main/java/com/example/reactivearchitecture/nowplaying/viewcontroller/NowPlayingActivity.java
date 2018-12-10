@@ -188,7 +188,7 @@ public class NowPlayingActivity extends BaseActivity {
         nowPlayingBinding.recyclerView.setLayoutManager(linearLayoutManager);
         nowPlayingBinding.recyclerView.addItemDecoration(new DividerItemDecoration(
                 this,
-                DividerItemDecoration.VERTICAL_LIST,
+                DividerItemDecoration.Companion.getVERTICAL_LIST(),
                 getResources().getColor(android.R.color.black, null)));
         nowPlayingListAdapter = new NowPlayingListAdapter(adapterList);
         nowPlayingBinding.recyclerView.setAdapter(nowPlayingListAdapter);
