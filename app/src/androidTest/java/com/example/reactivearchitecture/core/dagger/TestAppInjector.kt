@@ -26,7 +26,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 
-import com.example.reactivearchitecture.core.application.ReactiveArchitectureApplication
+import com.example.reactivearchitecture.core.application.TestReactiveArchitectureApplication
 
 import dagger.android.AndroidInjection
 import dagger.android.support.AndroidSupportInjection
@@ -35,24 +35,18 @@ import dagger.android.support.HasSupportFragmentInjector
 /**
  * Helper class to automatically inject fragments if they implement [Injectable].
  */
-object AppInjector {
-
-    /**
-     * Initialize injection for android components.
-     * @param reactiveArchitectureApplication - application
-     * @return create [ApplicationComponent]
-     */
-    fun init(reactiveArchitectureApplication: ReactiveArchitectureApplication):
-            ApplicationComponent {
+object TestAppInjector {
+    fun init(testReactiveArchitectureApplication: TestReactiveArchitectureApplication):
+            TestApplicationComponent {
 
         //  Notice the app module piece is no longer required. Unless you're creating a custom
         //  ApplicationModule constructor, it's no longer needed.
-        val component = DaggerApplicationComponent.builder()
-                .application(reactiveArchitectureApplication)
+        val testApplicationComponent = DaggerTestApplicationComponent.builder()
+                .application(testReactiveArchitectureApplication)
                 .build()
-        component.inject(reactiveArchitectureApplication)
+        testApplicationComponent.inject(testReactiveArchitectureApplication)
 
-        reactiveArchitectureApplication
+        testReactiveArchitectureApplication
                 .registerActivityLifecycleCallbacks(
                         object : Application.ActivityLifecycleCallbacks {
 
@@ -79,15 +73,15 @@ object AppInjector {
                     override fun onActivityDestroyed(activity: Activity) {}
                 })
 
-        return component
+        return testApplicationComponent
     }
 
     /**
-     * Handle the injection on the activity and any fragment that implements {link @Injectable}.
+     * Handle the injection on the activity and any fragment that implements {link @Injectable}
      * @param activity - activity to inject.
      */
     private fun handleActivity(activity: Activity) {
-        // Note - added because we don't always have to have fragments
+        //  Note - added because we don't always have to have fragments
         if (activity is Injectable) {
             AndroidInjection.inject(activity)
         } else if (activity is HasSupportFragmentInjector) {
@@ -98,12 +92,12 @@ object AppInjector {
                     .registerFragmentLifecycleCallbacks(
                             object : FragmentManager.FragmentLifecycleCallbacks() {
                                 override fun onFragmentCreated(
-                                    fragmentManager: FragmentManager,
-                                    fragment: Fragment,
+                                    fm: FragmentManager,
+                                    f: Fragment,
                                     savedInstanceState: Bundle?
                                 ) {
-                                    if (fragmentManager is Injectable) {
-                                        AndroidSupportInjection.inject(fragment)
+                                    if (f is Injectable) {
+                                        AndroidSupportInjection.inject(f)
                                     }
                                 }
                             }, true)
