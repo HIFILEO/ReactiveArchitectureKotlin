@@ -16,12 +16,11 @@
  * https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
  */
 
-package com.example.reactivearchitecture.core.dagger;
+package com.example.reactivearchitecture.core.dagger
 
 /**
  * Marks an activity / fragment injectable. This is used by the activity lifecycle listener in order
- * to call {@link dagger.android.AndroidInjection} without the need to do this manually in a base
+ * to call [dagger.android.AndroidInjection] without the need to do this manually in a base
  * class for every single activity.
  */
-public interface Injectable {
-}
+interface Injectable
