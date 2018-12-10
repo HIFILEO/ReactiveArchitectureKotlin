@@ -17,10 +17,9 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.model.action;
+package com.example.reactivearchitecture.core.model.action
 
 /**
- * Internal representation of {@link com.example.reactivearchitecture.nowplaying.model.event.UiEvent}.
+ * Internal representation of [com.example.reactivearchitecture.nowplaying.model.event.UiEvent].
  */
-public abstract class Action {
-}
+abstract class Action
