@@ -17,10 +17,16 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.model.action;
+package com.example.reactivearchitecture.core.viewcontroller
+
+import android.support.v7.app.AppCompatActivity
+
+import com.example.reactivearchitecture.core.dagger.Injectable
 
 /**
- * Internal representation of {@link com.example.reactivearchitecture.nowplaying.model.event.UiEvent}.
+ * Base class for all [AppCompatActivity].
  */
-public abstract class Action {
+abstract class BaseActivity : AppCompatActivity(), Injectable {
+    // Note - injection is no longer needed here. It's handled by the AppInjector with lifecycle
+    // callbacks.
 }
