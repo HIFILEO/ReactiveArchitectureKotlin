@@ -15,29 +15,29 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PA
 PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Inspired from:
+https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
  */
 
-package com.example.reactivearchitecture.core.application;
+package com.example.reactivearchitecture.core.dagger
 
-import android.util.Log;
+import android.arch.lifecycle.ViewModel
 
-import timber.log.Timber;
+import kotlin.annotation.Retention
+
+import dagger.MapKey
+import kotlin.reflect.KClass
 
 /**
- * A Timber Tree which logs nothing....
+ * Sets an annotation so [ViewModel] are mapped to [dagger.android.AndroidInjection].
  */
-public class CrashReportingTree extends Timber.Tree {
-    @Override
-    protected void log(int priority, String tag, String message, Throwable throwable) {
-        switch (priority) {
-            case Log.INFO:
-                break;
-            case Log.WARN:
-                break;
-            case Log.ERROR:
-                break;
-            default:
-                break;
-        }
-    }
-}
+@MustBeDocumented
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY_GETTER,
+        AnnotationTarget.PROPERTY_SETTER
+)
+@Retention(AnnotationRetention.RUNTIME)
+@MapKey
+internal annotation class ViewModelKey(val value: KClass<out ViewModel>)

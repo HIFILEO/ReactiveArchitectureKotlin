@@ -17,50 +17,47 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.dagger;
+package com.example.reactivearchitecture.core.dagger
 
-import android.app.Application;
+import android.app.Application
 
-import com.example.reactivearchitecture.core.application.ReactiveArchitectureApplication;
+import com.example.reactivearchitecture.core.application.ReactiveArchitectureApplication
 
-import javax.inject.Singleton;
+import javax.inject.Singleton
 
-import dagger.BindsInstance;
-import dagger.Component;
-import dagger.android.AndroidInjectionModule;
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjectionModule
 
 /**
- * Application-level Dagger2 {@link Component}.
+ * Application-level Dagger2 [Component].
  */
 @Singleton
-@Component(
-        modules = {
-                AndroidInjectionModule.class,
-                ApplicationModule.class,
-                ActivityComponentBuilder.class
-        })
-public interface ApplicationComponent {
+@Component(modules = arrayOf(
+    AndroidInjectionModule::class,
+    ApplicationModule::class,
+    ActivityComponentBuilder::class)
+)
+interface ApplicationComponent {
 
     /**
      * This is the custom builder for injecting the ApplicationModule with objects that it needs.
      * This eliminates the need for a constructor in the module.
      *
-     * <p>
      * Help from - https://proandroiddev.com/dagger-2-component-builder-1f2b91237856
-     * </p>
      */
     @Component.Builder
     interface Builder {
 
-        //Note - If you want to pass Application to constructors of provide methods this is what you do.
-        //Note - If you want to pass ReactiveArchitectureApplication to constructors of provide methods,
-        // you'll need to add it or cast.
+        // Note - If you want to pass Application to constructors of provide methods this is what
+        // you do.
+        // Note - If you want to pass ReactiveArchitectureApplication to constructors of provide
+        // methods, you'll need to add it or cast.
         @BindsInstance
-        Builder application(Application application);
+        fun application(application: Application): Builder
 
-        ApplicationComponent build();
-
+        fun build(): ApplicationComponent
     }
 
-    void inject(ReactiveArchitectureApplication application);
+    fun inject(application: ReactiveArchitectureApplication)
 }

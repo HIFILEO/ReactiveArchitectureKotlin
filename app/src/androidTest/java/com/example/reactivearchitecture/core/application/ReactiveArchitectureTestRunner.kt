@@ -17,20 +17,28 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.application;
+package com.example.reactivearchitecture.core.application
 
-import android.app.Application;
-import android.content.Context;
-import android.support.test.runner.AndroidJUnitRunner;
+import android.app.Application
+import android.content.Context
+import android.support.test.runner.AndroidJUnitRunner
 
 /**
- * Custom test runner so Espresso can utilize {@link TestReactiveArchitectureApplication} and inject
- * {@link com.example.reactivearchitecture.core.dagger.TestApplicationModule}
+ * Custom test runner so Espresso can utilize [TestReactiveArchitectureApplication] and inject
+ * [com.example.reactivearchitecture.core.dagger.TestApplicationModule]
  */
-public class ReactiveArchitectureTestRunner extends AndroidJUnitRunner {
-    @Override
-    public Application newApplication(ClassLoader cl, String className, Context context)
-            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        return super.newApplication(cl, TestReactiveArchitectureApplication.class.getName(), context);
+class ReactiveArchitectureTestRunner : AndroidJUnitRunner() {
+
+    @Throws(
+        InstantiationException::class,
+        IllegalAccessException::class,
+        ClassNotFoundException::class
+    )
+    override fun newApplication(cl: ClassLoader, className: String, context: Context): Application {
+        return super.newApplication(
+                cl,
+                TestReactiveArchitectureApplication::class.java.name,
+                context
+        )
     }
 }

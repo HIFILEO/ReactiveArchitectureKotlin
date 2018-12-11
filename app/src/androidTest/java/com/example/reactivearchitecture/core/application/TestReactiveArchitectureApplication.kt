@@ -15,30 +15,26 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PA
 PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-Inspired from:
-https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample
  */
 
-package com.example.reactivearchitecture.core.dagger;
+package com.example.reactivearchitecture.core.application
 
-import android.arch.lifecycle.ViewModel;
+import com.example.reactivearchitecture.core.dagger.TestAppInjector
+import com.example.reactivearchitecture.core.dagger.TestApplicationComponent
+import com.example.reactivearchitecture.nowplaying.service.ServiceApi
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import dagger.MapKey;
+import javax.inject.Inject
 
 /**
- * Sets an annotation so {@link ViewModel} are mapped to {@link dagger.android.AndroidInjection}.
+ * Test class for [ReactiveArchitectureApplication]
  */
-@Documented
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
-@MapKey
-@interface ViewModelKey {
-    Class<? extends ViewModel> value();
+class TestReactiveArchitectureApplication : ReactiveArchitectureApplication() {
+    var component: TestApplicationComponent? = null
+        private set
+
+    @Inject internal lateinit var serviceApi: ServiceApi
+
+    override fun setupComponent() {
+        component = TestAppInjector.init(this)
+    }
 }

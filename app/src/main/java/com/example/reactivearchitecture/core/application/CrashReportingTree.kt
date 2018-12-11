@@ -17,29 +17,26 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.application;
+package com.example.reactivearchitecture.core.application
 
-import com.example.reactivearchitecture.core.dagger.TestAppInjector;
-import com.example.reactivearchitecture.core.dagger.TestApplicationComponent;
-import com.example.reactivearchitecture.nowplaying.service.ServiceApi;
+import android.util.Log
 
-import javax.inject.Inject;
+import timber.log.Timber
 
 /**
- * Test class for {@link ReactiveArchitectureApplication}
+ * A Timber Tree which logs nothing....
  */
-public class TestReactiveArchitectureApplication extends ReactiveArchitectureApplication {
-    @Inject
-    ServiceApi serviceApi;
-    private TestApplicationComponent component;
-
-    @Override
-    void setupComponent() {
-        component = TestAppInjector.init(this);
+class CrashReportingTree : Timber.Tree() {
+    override fun log(priority: Int, tag: String, message: String, throwable: Throwable) {
+        when (priority) {
+            Log.INFO -> {
+            }
+            Log.WARN -> {
+            }
+            Log.ERROR -> {
+            }
+            else -> {
+            }
+        }
     }
-
-    public TestApplicationComponent getComponent() {
-        return component;
-    }
-
 }
