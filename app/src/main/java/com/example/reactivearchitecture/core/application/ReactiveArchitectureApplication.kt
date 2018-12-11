@@ -42,8 +42,7 @@ import timber.log.Timber
 open class ReactiveArchitectureApplication : Application(), HasActivityInjector {
     private var component: ApplicationComponent? = null
 
-    @Inject
-    internal lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
+    @Inject internal lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
     override fun onCreate() {
         super.onCreate()

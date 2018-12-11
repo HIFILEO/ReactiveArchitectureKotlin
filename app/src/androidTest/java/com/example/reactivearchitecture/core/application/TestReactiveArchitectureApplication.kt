@@ -17,20 +17,24 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.core.application;
+package com.example.reactivearchitecture.core.application
 
-import android.app.Application;
-import android.content.Context;
-import android.support.test.runner.AndroidJUnitRunner;
+import com.example.reactivearchitecture.core.dagger.TestAppInjector
+import com.example.reactivearchitecture.core.dagger.TestApplicationComponent
+import com.example.reactivearchitecture.nowplaying.service.ServiceApi
+
+import javax.inject.Inject
 
 /**
- * Custom test runner so Espresso can utilize {@link TestReactiveArchitectureApplication} and inject
- * {@link com.example.reactivearchitecture.core.dagger.TestApplicationModule}
+ * Test class for [ReactiveArchitectureApplication]
  */
-public class ReactiveArchitectureTestRunner extends AndroidJUnitRunner {
-    @Override
-    public Application newApplication(ClassLoader cl, String className, Context context)
-            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        return super.newApplication(cl, TestReactiveArchitectureApplication.class.getName(), context);
+class TestReactiveArchitectureApplication : ReactiveArchitectureApplication() {
+    var component: TestApplicationComponent? = null
+        private set
+
+    @Inject internal lateinit var serviceApi: ServiceApi
+
+    override fun setupComponent() {
+        component = TestAppInjector.init(this)
     }
 }
