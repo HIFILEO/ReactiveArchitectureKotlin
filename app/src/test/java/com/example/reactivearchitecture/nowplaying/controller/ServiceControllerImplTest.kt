@@ -74,6 +74,6 @@ class ServiceControllerImplTest : RxJavaTest() {
     }
 
     companion object {
-        private val IMAGE_PATH = "www.imagepath.com"
+        private const val IMAGE_PATH = "www.imagepath.com"
     }
 }
