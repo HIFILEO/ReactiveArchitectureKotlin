@@ -122,6 +122,11 @@ dependencies {
     androidTestImplementation 'com.google.dagger:dagger-android:2.15'
     androidTestImplementation 'com.squareup.retrofit2:retrofit-mock:2.2.0'
     androidTestImplementation 'org.mockito:mockito-android:2.6.2'
+    androidTestImplementation ("com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC1", {
+        exclude group: 'org.jetbrains.kotlin'
+        exclude group: 'org.mockito'
+    })
+
     androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.15'
     kaptAndroidTest 'com.google.dagger:dagger-compiler:2.15'
 

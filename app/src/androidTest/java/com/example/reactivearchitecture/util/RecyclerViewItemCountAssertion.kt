@@ -17,35 +17,29 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.util;
+package com.example.reactivearchitecture.util
 
-import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.espresso.ViewAssertion;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.support.test.espresso.NoMatchingViewException
+import android.support.test.espresso.ViewAssertion
+import android.support.v7.widget.RecyclerView
+import android.view.View
 
-import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
-import static org.hamcrest.Matchers.is;
+import android.support.test.espresso.matcher.ViewMatchers.assertThat
+import org.hamcrest.Matchers.`is`
 
 /**
- * Assert the {@link android.support.v7.widget.RecyclerView.Adapter} has a specific count given the parent's view id.
- *
+ * Assert the [android.support.v7.widget.RecyclerView.Adapter]
+ * has a specific count given the parent's view id.
  */
-public class RecyclerViewItemCountAssertion implements ViewAssertion {
-    private final int expectedCount;
+class RecyclerViewItemCountAssertion(private val expectedCount: Int) : ViewAssertion {
 
-    public RecyclerViewItemCountAssertion(int expectedCount) {
-        this.expectedCount = expectedCount;
-    }
-
-    @Override
-    public void check(View view, NoMatchingViewException noViewFoundException) {
+    override fun check(view: View, noViewFoundException: NoMatchingViewException?) {
         if (noViewFoundException != null) {
-            throw noViewFoundException;
+            throw noViewFoundException
         }
 
-        RecyclerView recyclerView = (RecyclerView) view;
-        RecyclerView.Adapter adapter = recyclerView.getAdapter();
-        assertThat(adapter.getItemCount(), is(expectedCount));
+        val recyclerView = view as RecyclerView
+        val adapter = recyclerView.adapter
+        assertThat(adapter!!.itemCount, `is`(expectedCount))
     }
 }
