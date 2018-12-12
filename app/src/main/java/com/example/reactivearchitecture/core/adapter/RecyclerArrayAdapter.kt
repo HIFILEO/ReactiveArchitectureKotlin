@@ -23,6 +23,7 @@ import android.support.v7.widget.RecyclerView
 
 import java.util.Collections
 import java.util.Comparator
+
 /**
  * Array adapter for Recycler view. The ArrayAdapter for list view cannot be used.
  * Inspiration from:
@@ -37,12 +38,12 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
 (private var objectList: MutableList<T>?) : RecyclerView.Adapter<V>() {
 
     /**
-     * Adds the specified object at the end of the array.
+     * Adds the specified t at the end of the array.
      *
-     * @param object The object to add at the end of the array.
+     * @param `t` The <T> to add at the end of the array.
      */
-    fun add(`object`: T) {
-        objectList!!.add(`object`)
+    fun add(t: T) {
+        objectList!!.add(t)
         notifyItemInserted(itemCount - 1)
     }
 
@@ -78,24 +79,24 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
     }
 
     /**
-     * Inserts the specified object at the specified index in the array.
+     * Inserts the specified t at the specified index in the array.
      *
-     * @param object The object to insert into the array.
-     * @param index The index at which the object must be inserted.
+     * @param `t` The <T> to insert into the array.
+     * @param index The index at which the t must be inserted.
      */
-    fun insert(`object`: T, index: Int) {
-        objectList!!.add(index, `object`)
+    fun insert(t: T, index: Int) {
+        objectList!!.add(index, t)
         notifyItemInserted(index)
     }
 
     /**
-     * Removes the specified object from the array.
+     * Removes the specified t from the array.
      *
-     * @param object The object to remove.
+     * @param `t` The t to remove.
      */
-    fun remove(`object`: T) {
-        val position = getPosition(`object`)
-        objectList!!.remove(`object`)
+    fun remove(t: T) {
+        val position = getPosition(t)
+        objectList!!.remove(t)
         notifyItemRemoved(position)
     }
 
