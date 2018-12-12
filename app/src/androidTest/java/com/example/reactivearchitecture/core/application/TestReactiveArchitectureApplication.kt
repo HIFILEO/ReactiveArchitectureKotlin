@@ -32,7 +32,7 @@ class TestReactiveArchitectureApplication : ReactiveArchitectureApplication() {
     var component: TestApplicationComponent? = null
         private set
 
-    @Inject internal lateinit var serviceApi: ServiceApi
+    @Inject public lateinit var serviceApi: ServiceApi
 
     override fun setupComponent() {
         component = TestAppInjector.init(this)
