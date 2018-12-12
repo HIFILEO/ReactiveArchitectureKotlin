@@ -74,7 +74,7 @@ public class ServiceApiTest extends RxJavaTest {
         //
         TestObserver<ServiceResponse> testObserver
                 = serviceApi.nowPlaying(API_TOKEN, mapToSend).test();
-        testScheduler.triggerActions();
+        getTestScheduler().triggerActions();
 
         //
         //Assert
