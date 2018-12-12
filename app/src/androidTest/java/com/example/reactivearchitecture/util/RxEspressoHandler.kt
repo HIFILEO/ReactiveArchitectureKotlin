@@ -17,37 +17,30 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.util;
+package com.example.reactivearchitecture.util
 
-import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.idling.CountingIdlingResource;
+import android.support.test.espresso.IdlingResource
+import android.support.test.espresso.idling.CountingIdlingResource
 
 /**
  * Rx Handler for idling. Read the following to understand how idling is calculated:
- * {@link RxEspressoObserverHandler}
- * {@link RxEspressoScheduleHandler}
+ * [RxEspressoObserverHandler]
+ * [RxEspressoScheduleHandler]
  */
-public class RxEspressoHandler {
-    private final CountingIdlingResource countingIdlingResource =
-            new CountingIdlingResource(RxEspressoHandler.class.getSimpleName(), true);
+class RxEspressoHandler {
+    private val countingIdlingResource = CountingIdlingResource(
+            RxEspressoHandler::class.java.simpleName,
+            true
+    )
 
-    private RxEspressoScheduleHandler rxEspressoScheduleHandler;
-    private RxEspressoObserverHandler rxEspressoObserverHandler;
+    val rxEspressoScheduleHandler: RxEspressoScheduleHandler
+    val rxEspressoObserverHandler: RxEspressoObserverHandler
 
-    public RxEspressoHandler() {
-        rxEspressoScheduleHandler = new RxEspressoScheduleHandler(countingIdlingResource);
-        rxEspressoObserverHandler = new RxEspressoObserverHandler(countingIdlingResource);
-    }
+    val idlingResource: IdlingResource
+        get() = countingIdlingResource
 
-    public IdlingResource getIdlingResource() {
-        return countingIdlingResource;
-    }
-
-    public RxEspressoScheduleHandler getRxEspressoScheduleHandler() {
-        return rxEspressoScheduleHandler;
-    }
-
-    public RxEspressoObserverHandler getRxEspressoObserverHandler() {
-        return rxEspressoObserverHandler;
+    init {
+        rxEspressoScheduleHandler = RxEspressoScheduleHandler(countingIdlingResource)
+        rxEspressoObserverHandler = RxEspressoObserverHandler(countingIdlingResource)
     }
 }

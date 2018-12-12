@@ -17,24 +17,19 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.util;
+package com.example.reactivearchitecture.util
 
-import android.content.Context;
+import android.content.Context
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 /**
  * Helper for reading json data files from assets folder for Espresso Tests.
+ *
+ * Note - object - singleton utility FTW
  */
-public class TestEspressoAssetFileHelper {
-
-    /**
-     * Private constructor to guard against instantiation.
-     */
-    private TestEspressoAssetFileHelper() {
-    }
+object TestEspressoAssetFileHelper {
 
     /**
      * Return the contents of the file with the provided fileName from the test resource directory.
@@ -44,14 +39,16 @@ public class TestEspressoAssetFileHelper {
      * @return The contents of the file with the provided fileName from the test resource directory.
      * @throws Exception if something goes wrong.
      */
-    public static String getFileContentAsString(Context context, String fileName) throws Exception {
-        InputStream inputStream = context.getAssets().open(fileName);
-        StringBuilder contents = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        String line;
-        while ((line = br.readLine()) != null) {
-            contents.append(line);
+    @Throws(Exception::class)
+    fun getFileContentAsString(context: Context, fileName: String): String {
+        val inputStream = context.assets.open(fileName)
+        val contents = StringBuilder()
+        val br = BufferedReader(InputStreamReader(inputStream))
+        var line: String? = br.readLine()
+        while (line != null) {
+            contents.append(line)
+            line = br.readLine()
         }
-        return contents.toString();
+        return contents.toString()
     }
 }
