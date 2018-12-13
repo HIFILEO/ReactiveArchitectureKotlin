@@ -17,40 +17,36 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.adapter;
+package com.example.reactivearchitecture.nowplaying.adapter
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 
-import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent;
+import com.jakewharton.rxbinding2.support.v7.widget.RecyclerViewScrollEvent
 
 /**
- * Class for handling when {@link RecyclerView} hits the bottom of a scroll. Only works
- * for {@link LinearLayoutManager}.
+ * Class for handling when [RecyclerView] hits the bottom of a scroll. Only works
+ * for [LinearLayoutManager].
  */
-public class ScrollEventCalculator {
-    private RecyclerViewScrollEvent recyclerViewScrollEvent;
-
-    public ScrollEventCalculator(RecyclerViewScrollEvent recyclerViewScrollEvent) {
-        this.recyclerViewScrollEvent = recyclerViewScrollEvent;
-    }
+class ScrollEventCalculator(private val recyclerViewScrollEvent: RecyclerViewScrollEvent) {
 
     /**
      * Determine if the scroll event at the end of the recycler view.
      * @return true if at end of linear list recycler view, false otherwise.
      */
-    public boolean isAtScrollEnd() {
-        RecyclerView.LayoutManager layoutManager =
-                recyclerViewScrollEvent.view().getLayoutManager();
-        if (layoutManager instanceof LinearLayoutManager) {
-            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+    val isAtScrollEnd: Boolean
+        get() {
+            val layoutManager = recyclerViewScrollEvent.view().layoutManager
 
-            int totalItemCount = linearLayoutManager.getItemCount();
-            int lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+            return if (layoutManager is LinearLayoutManager) {
+                val linearLayoutManager = layoutManager as LinearLayoutManager?
 
-            return totalItemCount <= (lastVisibleItem + 2);
-        } else {
-            return false;
+                val totalItemCount = linearLayoutManager!!.itemCount
+                val lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition()
+
+                totalItemCount <= lastVisibleItem + 2
+            } else {
+                false
+            }
         }
-    }
 }

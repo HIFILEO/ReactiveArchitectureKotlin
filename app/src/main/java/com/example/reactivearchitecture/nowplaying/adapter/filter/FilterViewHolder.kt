@@ -17,15 +17,29 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.controller;
+package com.example.reactivearchitecture.nowplaying.adapter.filter
 
-import com.example.reactivearchitecture.nowplaying.model.NowPlayingInfo;
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 
-import io.reactivex.Observable;
+import com.example.reactivearchitecture.R
+import com.example.reactivearchitecture.core.adapter.BaseViewHolder
+import com.example.reactivearchitecture.nowplaying.view.FilterView
 
 /**
- * Gateway that fetches movie information from a RESTFUL api service.
+ * [FilterView] holder.
  */
-public interface ServiceController {
-    Observable<NowPlayingInfo> getNowPlaying(int pageNumber);
+class FilterViewHolder(itemView: View) : BaseViewHolder(itemView) {
+    private val filterImageView: ImageView = itemView.findViewById(R.id.filterImageView)
+    private val filterTextView: TextView = itemView.findViewById(R.id.filterTextView)
+
+    /**
+     * Bind the [FilterView] to the view holder.
+     * @param filterView - data to bind with.
+     */
+    fun bind(filterView: FilterView) {
+        filterImageView.setImageResource(filterView.drawableResource)
+        filterTextView.text = filterView.filterText
+    }
 }
