@@ -35,7 +35,7 @@ import java.util.Comparator
  * @constructor Creates an adapter backed by the data <T>
  */
 abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
-(private var objectList: MutableList<T>?) : RecyclerView.Adapter<V>() {
+(private var objectList: MutableList<T?>) : RecyclerView.Adapter<V>() {
 
     /**
      * Adds the specified t at the end of the array.
@@ -43,7 +43,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      * @param `t` The <T> to add at the end of the array.
      */
     fun add(t: T) {
-        objectList!!.add(t)
+        objectList.add(t)
         notifyItemInserted(itemCount - 1)
     }
 
@@ -52,16 +52,16 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      */
     fun clear() {
         val size = itemCount
-        objectList!!.clear()
+        objectList.clear()
         notifyItemRangeRemoved(0, size)
     }
 
     override fun getItemCount(): Int {
-        return objectList!!.size
+        return objectList.size
     }
 
-    fun getItem(position: Int): T {
-        return objectList!![position]
+    fun getItem(position: Int): T? {
+        return objectList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -75,7 +75,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      * @return The position of the specified item.
      */
     fun getPosition(item: T): Int {
-        return objectList!!.indexOf(item)
+        return objectList.indexOf(item)
     }
 
     /**
@@ -85,7 +85,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      * @param index The index at which the t must be inserted.
      */
     fun insert(t: T, index: Int) {
-        objectList!!.add(index, t)
+        objectList.add(index, t)
         notifyItemInserted(index)
     }
 
@@ -96,7 +96,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      */
     fun remove(t: T) {
         val position = getPosition(t)
-        objectList!!.remove(t)
+        objectList.remove(t)
         notifyItemRemoved(position)
     }
 
@@ -105,7 +105,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      *
      * @param comparator The comparator used to sort the objectList contained in this adapter.
      */
-    fun sort(comparator: Comparator<in T>) {
+    fun sort(comparator: Comparator<in T?>) {
         Collections.sort(objectList, comparator)
         notifyItemRangeChanged(0, itemCount)
     }
@@ -115,7 +115,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      *
      * @param newList - new list
      */
-    fun replace(newList: MutableList<T>) {
+    fun replace(newList: MutableList<T?>) {
         objectList = newList
         notifyDataSetChanged()
     }
