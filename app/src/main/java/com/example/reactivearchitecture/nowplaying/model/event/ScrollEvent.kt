@@ -17,10 +17,17 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.event;
+package com.example.reactivearchitecture.nowplaying.model.event
 
 /**
- * Base class for UiEvents.
+ * Scroll Events.
  */
-public abstract class UiEvent {
+class ScrollEvent : UiEvent {
+    var pageNumber: Int = 0
+
+    constructor(pageNumber: Int) {
+        this.pageNumber = pageNumber
+    }
+
+    constructor() {}
 }

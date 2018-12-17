@@ -17,26 +17,9 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.event;
+package com.example.reactivearchitecture.nowplaying.model.event
 
 /**
- * Scroll Events.
+ * Base class for UiEvents.
  */
-public class ScrollEvent extends UiEvent {
-    private int pageNumber;
-
-    public ScrollEvent(int pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-
-    public ScrollEvent() {
-    }
-
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-}
+abstract class UiEvent
