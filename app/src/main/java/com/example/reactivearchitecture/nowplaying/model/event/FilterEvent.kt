@@ -17,19 +17,9 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.event;
+package com.example.reactivearchitecture.nowplaying.model.event
 
 /**
  * Filter Events.
  */
-public class FilterEvent extends UiEvent {
-    private boolean filterOn;
-
-    public FilterEvent(boolean filterOn) {
-        this.filterOn = filterOn;
-    }
-
-    public boolean isFilterOn() {
-        return filterOn;
-    }
-}
+class FilterEvent(val isFilterOn: Boolean) : UiEvent()
