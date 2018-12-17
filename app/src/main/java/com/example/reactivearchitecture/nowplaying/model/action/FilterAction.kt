@@ -17,21 +17,11 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.action;
+package com.example.reactivearchitecture.nowplaying.model.action
 
-import com.example.reactivearchitecture.core.model.action.Action;
+import com.example.reactivearchitecture.core.model.action.Action
 
 /**
- * Internal representation of {@link com.example.reactivearchitecture.nowplaying.model.event.RestoreEvent}.
+ * Internal representation of [com.example.reactivearchitecture.nowplaying.model.event.FilterEvent].
  */
-public class RestoreAction extends Action {
-    private int pageNumberToRestore;
-
-    public RestoreAction(int pageNumberToRestore) {
-        this.pageNumberToRestore = pageNumberToRestore;
-    }
-
-    public int getPageNumberToRestore() {
-        return pageNumberToRestore;
-    }
-}
+class FilterAction(val isFilterOn: Boolean) : Action()

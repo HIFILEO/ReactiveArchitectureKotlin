@@ -17,21 +17,11 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.action;
+package com.example.reactivearchitecture.nowplaying.model.action
 
-import com.example.reactivearchitecture.core.model.action.Action;
+import com.example.reactivearchitecture.core.model.action.Action
 
 /**
- * Internal representation of {@link com.example.reactivearchitecture.nowplaying.model.event.ScrollEvent}.
+ * Internal representation of [com.example.reactivearchitecture.nowplaying.model.event.ScrollEvent].
  */
-public class ScrollAction extends Action {
-    private int pageNumber;
-
-    public ScrollAction(int pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-
-    public int getPageNumber() {
-        return pageNumber;
-    }
-}
+class ScrollAction(val pageNumber: Int) : Action()
