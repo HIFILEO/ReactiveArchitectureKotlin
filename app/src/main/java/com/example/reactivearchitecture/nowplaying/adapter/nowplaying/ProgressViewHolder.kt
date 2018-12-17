@@ -17,18 +17,13 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.adapter.nowplaying;
+package com.example.reactivearchitecture.nowplaying.adapter.nowplaying
 
-import android.view.View;
+import android.view.View
 
-import com.example.reactivearchitecture.core.adapter.BaseViewHolder;
+import com.example.reactivearchitecture.core.adapter.BaseViewHolder
 
 /**
  * View holder for Progress Item.
  */
-public class ProgressViewHolder extends BaseViewHolder {
-
-    public ProgressViewHolder(View view) {
-        super(view);
-    }
-}
+class ProgressViewHolder(view: View) : BaseViewHolder(view)
