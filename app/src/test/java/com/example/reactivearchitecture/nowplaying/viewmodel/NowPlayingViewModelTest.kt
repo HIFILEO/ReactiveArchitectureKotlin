@@ -199,7 +199,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         val movieInfoList = ArrayList<MovieInfo>()
         movieInfoList.add(movieInfo)
 
-        val scrollResultSuccess = ScrollResult.sucess(pageNumber, movieInfoList)
+        val scrollResultSuccess = ScrollResult.success(pageNumber, movieInfoList)
 
         val argumentCaptor = argumentCaptor<Action>()
 
@@ -279,7 +279,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         val restoreResult_inFlight_1 = RestoreResult.inFlight(1, null)
         val restoreResult_inFlight_1_success = RestoreResult.inFlight(1, movieInfoList1)
         val restoreResult_inFlight_2 = RestoreResult.inFlight(2, null)
-        val restoreResult_success_2 = RestoreResult.sucess(2, movieInfoList2)
+        val restoreResult_success_2 = RestoreResult.success(2, movieInfoList2)
 
         val argumentCaptor = argumentCaptor<Action>()
         whenever(mockTestTransformer.transform(argumentCaptor.capture()))
