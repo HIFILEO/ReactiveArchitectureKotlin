@@ -5,14 +5,14 @@ import android.app.Application
 import com.example.reactivearchitecture.categories.UnitTest
 import com.example.reactivearchitecture.nowplaying.controller.ServiceController
 import com.example.reactivearchitecture.nowplaying.interactor.NowPlayingInteractor
-import com.example.reactivearchitecture.nowplaying.model.AdapterCommandType
-import com.example.reactivearchitecture.nowplaying.model.FilterManager
-import com.example.reactivearchitecture.nowplaying.model.MovieInfo
-import com.example.reactivearchitecture.nowplaying.model.MovieInfoImpl
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfoImpl
 import com.example.reactivearchitecture.nowplaying.model.uimodel.UiModel
 import com.example.reactivearchitecture.core.model.action.Action
+import com.example.reactivearchitecture.nowplaying.model.AdapterCommand
+import com.example.reactivearchitecture.nowplaying.model.FilterManager
+import com.example.reactivearchitecture.nowplaying.model.MovieInfo
+import com.example.reactivearchitecture.nowplaying.model.MovieInfoImpl
 import com.example.reactivearchitecture.nowplaying.model.action.ScrollAction
 import com.example.reactivearchitecture.nowplaying.model.result.FilterResult
 import com.example.reactivearchitecture.nowplaying.model.result.RestoreResult
@@ -113,7 +113,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         val uiModel = testObserver.events[0][0] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNull()
         assertThat(uiModel.failureMsg).isNull()
@@ -162,7 +162,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         val uiModel = testObserver.events[0][1] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNull()
         assertThat(uiModel.failureMsg).isNull()
@@ -230,7 +230,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isFalse()
         assertThat(uiModel.adapterCommandType).isEqualTo(
-                AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS)
+                AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNotEmpty
@@ -310,7 +310,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         var uiModel = testObserver.events[0][0] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNullOrEmpty()
         assertThat(uiModel.failureMsg).isNull()
@@ -321,7 +321,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModel = testObserver.events[0][1] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNullOrEmpty()
         assertThat(uiModel.failureMsg).isNull()
@@ -332,7 +332,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModel = testObserver.events[0][2] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.ADD_DATA_ONLY)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.ADD_DATA_ONLY)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNotEmpty
@@ -352,7 +352,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModel = testObserver.events[0][3] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isTrue()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNullOrEmpty()
@@ -364,7 +364,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModel = testObserver.events[0][4] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isFalse()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.ADD_DATA_ONLY)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.ADD_DATA_ONLY)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(2)
         assertThat(uiModel.resultList).isNotEmpty
@@ -428,7 +428,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModelBuilder.setEnableScrollListener(true)
         uiModelBuilder.setFirstTimeLoad(false)
         uiModelBuilder.setResultList(null)
-        uiModelBuilder.setAdapterCommandType(AdapterCommandType.DO_NOTHING)
+        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
 
         nowPlayingViewModel.init(uiModelBuilder.createUiModel())
 
@@ -455,7 +455,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         var uiModel = testObserver.events[0][0] as UiModel
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isFalse()
-        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommandType.DO_NOTHING)
+        assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(movieViewInfoList.size)
         assertThat(uiModel.resultList).isNullOrEmpty()
@@ -468,7 +468,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isFalse()
         assertThat(uiModel.adapterCommandType).isEqualTo(
-                AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER)
+                AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER)
         assertThat(uiModel.currentList).hasSize(movieInfoList_HighRating.size)
         assertThat(uiModel.resultList).isNullOrEmpty()
         assertThat(uiModel.failureMsg).isNull()
@@ -523,7 +523,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModelBuilder.setEnableScrollListener(true)
         uiModelBuilder.setFirstTimeLoad(false)
         uiModelBuilder.setResultList(null)
-        uiModelBuilder.setAdapterCommandType(AdapterCommandType.DO_NOTHING)
+        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
 
         nowPlayingViewModel.init(uiModelBuilder.createUiModel())
 
@@ -554,7 +554,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel).isNotNull()
         assertThat(uiModel.isFirstTimeLoad).isFalse()
         assertThat(uiModel.adapterCommandType).isEqualTo(
-                AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER)
+                AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER)
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(movieViewInfoList.size)
         assertThat(uiModel.resultList).isNullOrEmpty()

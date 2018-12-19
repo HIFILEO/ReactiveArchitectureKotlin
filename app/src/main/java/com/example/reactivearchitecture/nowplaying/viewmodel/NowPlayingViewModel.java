@@ -33,7 +33,7 @@ import com.example.reactivearchitecture.R;
 import com.example.reactivearchitecture.core.model.action.Action;
 import com.example.reactivearchitecture.nowplaying.controller.ServiceController;
 import com.example.reactivearchitecture.nowplaying.interactor.NowPlayingInteractor;
-import com.example.reactivearchitecture.nowplaying.model.AdapterCommandType;
+import com.example.reactivearchitecture.nowplaying.model.AdapterCommand;
 import com.example.reactivearchitecture.nowplaying.model.FilterManager;
 import com.example.reactivearchitecture.nowplaying.model.FilterTransformer;
 import com.example.reactivearchitecture.nowplaying.model.MovieInfo;
@@ -269,7 +269,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setEnableScrollListener(false)
                         .setResultList(null)
                         .setAdapterCommandType(scrollResult.getPageNumber() == 1
-                                ? AdapterCommandType.DO_NOTHING : AdapterCommandType.SHOW_IN_PROGRESS);
+                                ? AdapterCommand.DO_NOTHING : AdapterCommand.SHOW_IN_PROGRESS);
                 break;
             case Result.SUCCESS:
                 List<MovieViewInfo> listToAdd = translateResultsForUi(scrollResult.getResult());
@@ -284,7 +284,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setEnableScrollListener(true)
                         .setCurrentList(currentList)
                         .setResultList(listToAdd)
-                        .setAdapterCommandType(AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS);
+                        .setAdapterCommandType(AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS);
                 break;
             case Result.FAILURE:
                 Timber.e(scrollResult.getError());
@@ -296,7 +296,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setPageNumber(scrollResult.getPageNumber() - 1)
                         .setEnableScrollListener(false)
                         .setResultList(null)
-                        .setAdapterCommandType(AdapterCommandType.DO_NOTHING);
+                        .setAdapterCommandType(AdapterCommand.DO_NOTHING);
                 break;
             default:
                 //Unknown result - throw error
@@ -334,7 +334,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setCurrentList(currentList)
                         .setResultList(listToAdd)
                         .setAdapterCommandType(listToAdd == null || listToAdd.isEmpty()
-                                ? AdapterCommandType.DO_NOTHING : AdapterCommandType.ADD_DATA_ONLY);
+                                ? AdapterCommand.DO_NOTHING : AdapterCommand.ADD_DATA_ONLY);
                 break;
             case Result.SUCCESS:
                 //Success
@@ -345,7 +345,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setEnableScrollListener(true)
                         .setCurrentList(currentList)
                         .setResultList(listToAdd)
-                        .setAdapterCommandType(AdapterCommandType.ADD_DATA_ONLY);
+                        .setAdapterCommandType(AdapterCommand.ADD_DATA_ONLY);
                 break;
             case Result.FAILURE:
                 Timber.e(restoreResult.getError());
@@ -357,7 +357,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setPageNumber(restoreResult.getPageNumber() - 1)
                         .setEnableScrollListener(false)
                         .setResultList(null)
-                        .setAdapterCommandType(AdapterCommandType.DO_NOTHING);
+                        .setAdapterCommandType(AdapterCommand.DO_NOTHING);
                 break;
             default:
                 //Unknown result - throw error
@@ -386,7 +386,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setCurrentList(translateResultsForUi(filterResult.getFilteredList()))
                         .setFilterOn(filterResult.isFilterOn())
                         .setResultList(null)
-                        .setAdapterCommandType(AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER);
+                        .setAdapterCommandType(AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER);
                 break;
             case Result.FAILURE:
                 Timber.e("Failure during filter. Throw error, this should never happen.");

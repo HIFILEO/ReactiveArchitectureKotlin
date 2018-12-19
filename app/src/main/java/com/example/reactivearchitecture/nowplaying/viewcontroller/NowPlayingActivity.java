@@ -40,7 +40,7 @@ import com.example.reactivearchitecture.databinding.ActivityNowPlayingBinding;
 import com.example.reactivearchitecture.nowplaying.adapter.ScrollEventCalculator;
 import com.example.reactivearchitecture.nowplaying.adapter.filter.FilterAdapter;
 import com.example.reactivearchitecture.nowplaying.adapter.nowplaying.NowPlayingListAdapter;
-import com.example.reactivearchitecture.nowplaying.model.AdapterCommandType;
+import com.example.reactivearchitecture.nowplaying.model.AdapterCommand;
 import com.example.reactivearchitecture.nowplaying.model.event.FilterEvent;
 import com.example.reactivearchitecture.nowplaying.model.event.ScrollEvent;
 import com.example.reactivearchitecture.nowplaying.model.uimodel.UiModel;
@@ -298,11 +298,11 @@ public class NowPlayingActivity extends BaseActivity {
             ArrayList<MovieViewInfo> adapterData = (ArrayList<MovieViewInfo>) uiModel.getCurrentList();
 
             //Process last adapter command
-            if (uiModel.getAdapterCommandType() == AdapterCommandType.ADD_DATA_ONLY
-                    || uiModel.getAdapterCommandType() == AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS
-                    || uiModel.getAdapterCommandType() == AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER) {
+            if (uiModel.getAdapterCommandType() == AdapterCommand.ADD_DATA_ONLY
+                    || uiModel.getAdapterCommandType() == AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS
+                    || uiModel.getAdapterCommandType() == AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER) {
                 adapterData.addAll(uiModel.getResultList());
-            } else if (uiModel.getAdapterCommandType() == AdapterCommandType.SHOW_IN_PROGRESS) {
+            } else if (uiModel.getAdapterCommandType() == AdapterCommand.SHOW_IN_PROGRESS) {
                 adapterData.add(null);
             }
 
@@ -316,7 +316,7 @@ public class NowPlayingActivity extends BaseActivity {
 
         } else {
             switch (uiModel.getAdapterCommandType()) {
-                case AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS:
+                case AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS:
                     //Remove Null Spinner
                     if (nowPlayingListAdapter.getItemCount() > 0) {
                         nowPlayingListAdapter.remove(
@@ -326,16 +326,16 @@ public class NowPlayingActivity extends BaseActivity {
                     //Add Data
                     nowPlayingListAdapter.addList(uiModel.getResultList());
                     break;
-                case AdapterCommandType.ADD_DATA_ONLY:
+                case AdapterCommand.ADD_DATA_ONLY:
                     //Add Data
                     nowPlayingListAdapter.addList(uiModel.getResultList());
                     break;
-                case AdapterCommandType.SHOW_IN_PROGRESS:
+                case AdapterCommand.SHOW_IN_PROGRESS:
                     //Add null to adapter. Null shows spinner in Adapter logic.
                     nowPlayingListAdapter.add(null);
                     nowPlayingBinding.recyclerView.scrollToPosition(nowPlayingListAdapter.getItemCount() - 1);
                     break;
-                case AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER:
+                case AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER:
                     List<MovieViewInfo> currentList = uiModel.getCurrentList();
 
                     //Check if loading was in progress

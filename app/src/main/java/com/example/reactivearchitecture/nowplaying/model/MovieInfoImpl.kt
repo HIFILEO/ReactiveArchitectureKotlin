@@ -17,17 +17,21 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model;
+package com.example.reactivearchitecture.nowplaying.model
 
-import java.util.List;
+import java.util.Date
 
 /**
- * Internal business logic representation of "Now Playing" information.
+ * Implementation of [MovieInfo].
+ *
+ * @param pictureUrl -
+ * @param title -
+ * @param releaseDate -
+ * @param rating -
  */
-public interface NowPlayingInfo {
-    List<MovieInfo> getMovies();
-
-    int getPageNumber();
-
-    int getTotalPageNumber();
-}
+class MovieInfoImpl(
+    override val pictureUrl: String,
+    override val title: String,
+    override val releaseDate: Date,
+    override val rating: Double
+) : MovieInfo
