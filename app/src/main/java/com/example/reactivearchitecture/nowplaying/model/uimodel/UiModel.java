@@ -23,7 +23,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import com.example.reactivearchitecture.nowplaying.model.AdapterCommandType;
+import com.example.reactivearchitecture.nowplaying.model.AdapterCommand;
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo;
 
 import java.util.ArrayList;
@@ -40,8 +40,7 @@ public class UiModel implements Parcelable {
     private boolean enableScrollListener;
     private List<MovieViewInfo> currentList;
     private List<MovieViewInfo> resultList;
-    private @AdapterCommandType
-    int adapterCommandType;
+    private @AdapterCommand.AdapterCommandType int adapterCommandType;
     private boolean filterOn;
 
     protected UiModel(Parcel in) {
@@ -51,7 +50,7 @@ public class UiModel implements Parcelable {
         this.enableScrollListener = false;
         this.currentList = null;
         this.resultList = null;
-        this.adapterCommandType = AdapterCommandType.DO_NOTHING;
+        this.adapterCommandType = AdapterCommand.DO_NOTHING;
         this.filterOn = in.readByte() != 0;
     }
 
@@ -73,7 +72,7 @@ public class UiModel implements Parcelable {
      * @return - new UiModel in createNonInjectedData state.
      */
     public static UiModel initState() {
-        return new UiModel(true, null, 0, false, new ArrayList<MovieViewInfo>(), null, AdapterCommandType.DO_NOTHING, false);
+        return new UiModel(true, null, 0, false, new ArrayList<MovieViewInfo>(), null, AdapterCommand.DO_NOTHING, false);
     }
 
     private UiModel(boolean firstTimeLoad, String failureMsg, int pageNumber, boolean enableScrollListener,
@@ -148,7 +147,7 @@ public class UiModel implements Parcelable {
         private boolean enableScrollListener;
         private List<MovieViewInfo> currentList;
         private List<MovieViewInfo> resultList;
-        private @AdapterCommandType int adapterCommandType;
+        private @AdapterCommand.AdapterCommandType int adapterCommandType;
         private boolean filterOn;
 
         /**

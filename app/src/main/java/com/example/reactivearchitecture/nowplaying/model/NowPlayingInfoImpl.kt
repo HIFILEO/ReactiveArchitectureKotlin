@@ -17,24 +17,21 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model;
-
-import android.support.annotation.IntDef;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+package com.example.reactivearchitecture.nowplaying.model
 
 /**
- * Command Types.
+ * Implementation of [NowPlayingInfo].
+ * @param movieInfoList -
+ * @param pageNumber -
+ * @param totalPageNumber -
  */
-@IntDef({AdapterCommandType.DO_NOTHING, AdapterCommandType.ADD_DATA_ONLY,  AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS,
-        AdapterCommandType.SHOW_IN_PROGRESS, AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER})
-@Retention(RetentionPolicy.SOURCE)
-@SuppressWarnings("checkstyle:abbreviationaswordinname")
-public @interface AdapterCommandType {
-    int DO_NOTHING = 0;
-    int ADD_DATA_ONLY = 1;
-    int ADD_DATA_REMOVE_IN_PROGRESS = 2;
-    int SHOW_IN_PROGRESS = 3;
-    int SWAP_LIST_DUE_TO_NEW_FILTER = 4;
+class NowPlayingInfoImpl(
+    private val movieInfoList: List<MovieInfo>,
+    override val pageNumber: Int,
+    override val totalPageNumber: Int
+) : NowPlayingInfo {
+
+    // Note - overridden movies was renamed movieInfoList, hence the extra getter method
+    override val movies: List<MovieInfo>
+        get() = movieInfoList
 }

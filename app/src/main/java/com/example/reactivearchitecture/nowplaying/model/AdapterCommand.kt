@@ -17,42 +17,33 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model;
+package com.example.reactivearchitecture.nowplaying.model
 
-import java.util.List;
+import android.support.annotation.IntDef
+
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 
 /**
- * Implementation of {@link NowPlayingInfo}.
+ * Command Types.
  */
-public class NowPlayingInfoImpl implements NowPlayingInfo {
-    private final List<MovieInfo> movieInfoList;
-    private int pageNumber;
-    private int totalPageNumber;
+class AdapterCommand {
 
-    /**
-     * Constructor.
-     * @param movieInfoList -
-     * @param pageNumber -
-     * @param totalPageNumber -
-     */
-    public NowPlayingInfoImpl(List<MovieInfo> movieInfoList, int pageNumber, int totalPageNumber) {
-        this.movieInfoList = movieInfoList;
-        this.pageNumber = pageNumber;
-        this.totalPageNumber = totalPageNumber;
-    }
+    @IntDef(
+            AdapterCommand.DO_NOTHING,
+            AdapterCommand.ADD_DATA_ONLY,
+            AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS,
+            AdapterCommand.SHOW_IN_PROGRESS,
+            AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER
+    )
+    @Retention(RetentionPolicy.SOURCE)
+    annotation class AdapterCommandType
 
-    @Override
-    public List<MovieInfo> getMovies() {
-        return movieInfoList;
-    }
-
-    @Override
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
-    @Override
-    public int getTotalPageNumber() {
-        return totalPageNumber;
+    companion object {
+        const val DO_NOTHING = 0
+        const val ADD_DATA_ONLY = 1
+        const val ADD_DATA_REMOVE_IN_PROGRESS = 2
+        const val SHOW_IN_PROGRESS = 3
+        const val SWAP_LIST_DUE_TO_NEW_FILTER = 4
     }
 }

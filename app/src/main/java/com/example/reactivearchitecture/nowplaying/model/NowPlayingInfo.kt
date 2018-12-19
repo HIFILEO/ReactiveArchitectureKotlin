@@ -17,19 +17,15 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model;
-
-import java.util.Date;
+package com.example.reactivearchitecture.nowplaying.model
 
 /**
- * Internal business logic representation of movie information.
+ * Internal business logic representation of "Now Playing" information.
  */
-public interface MovieInfo {
-    String getPictureUrl();
+interface NowPlayingInfo {
+    val movies: List<MovieInfo>
 
-    String getTitle();
+    val pageNumber: Int
 
-    Date getReleaseDate();
-
-    double getRating();
+    val totalPageNumber: Int
 }

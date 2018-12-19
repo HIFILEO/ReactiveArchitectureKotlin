@@ -17,50 +17,19 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model;
+package com.example.reactivearchitecture.nowplaying.model
 
-import java.util.Date;
+import java.util.Date
 
 /**
- * Implementation of {@link MovieInfo}.
+ * Internal business logic representation of movie information.
  */
-public class MovieInfoImpl implements MovieInfo {
-    private String pictureUrl;
-    private String title;
-    private Date releaseDate;
-    private double rating;
+interface MovieInfo {
+    val pictureUrl: String
 
-    /**
-     * Constructor.
-     * @param pictureUrl -
-     * @param title -
-     * @param releaseDate -
-     * @param rating -
-     */
-    public MovieInfoImpl(String pictureUrl, String title, Date releaseDate, double rating) {
-        this.pictureUrl = pictureUrl;
-        this.title = title;
-        this.releaseDate = releaseDate;
-        this.rating = rating;
-    }
+    val title: String
 
-    @Override
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
+    val releaseDate: Date
 
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public Date getReleaseDate() {
-        return releaseDate;
-    }
-
-    @Override
-    public double getRating() {
-        return rating;
-    }
+    val rating: Double
 }
