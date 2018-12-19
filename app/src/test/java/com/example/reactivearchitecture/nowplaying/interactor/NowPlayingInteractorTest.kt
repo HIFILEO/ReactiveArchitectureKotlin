@@ -129,7 +129,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
         assertThat(scrollResult.result).isNull()
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.IN_FLIGHT)
+        assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // SUCCESS
         val resultSuccess = testObserver.events[0][1] as Result
@@ -141,7 +141,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResultSuccess.error).isNull()
         assertThat(scrollResultSuccess.result).isNotEmpty
         assertThat(scrollResultSuccess.result).hasSize(5)
-        assertThat(scrollResultSuccess.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(scrollResultSuccess.type).isEqualTo(Result.SUCCESS)
 
         for (i in 0..4) {
             assertThat(scrollResultSuccess.result!![i]).isEqualTo(movieInfo)
@@ -191,7 +191,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
         assertThat(scrollResult.result).isNull()
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.IN_FLIGHT)
+        assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // FAILURE
         result = testObserver.events[0][1] as Result
@@ -201,9 +201,9 @@ class NowPlayingInteractorTest : RxJavaTest() {
         scrollResult = result as ScrollResult
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNotNull()
-        assertThat(scrollResult.error.message).isEqualTo(errorMessage)
+        assertThat(scrollResult.error?.message).isEqualTo(errorMessage)
         assertThat(scrollResult.result).isNull()
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.FAILURE)
+        assertThat(scrollResult.type).isEqualTo(Result.FAILURE)
 
         // SUCCESS
         result = testObserver.events[0][2] as Result
@@ -215,7 +215,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.error).isNull()
         assertThat(scrollResult.result).isNotEmpty
         assertThat(scrollResult.result).hasSize(5)
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(scrollResult.type).isEqualTo(Result.SUCCESS)
 
         for (i in 0..4) {
             assertThat(scrollResult.result!![i]).isEqualTo(movieInfo)
@@ -263,7 +263,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(restoreResult.pageNumber).isEqualTo(pageNumber)
         assertThat(restoreResult.error).isNull()
         assertThat(restoreResult.result).isNull()
-        assertThat(restoreResult.type).isEqualTo(Result.ResultType.IN_FLIGHT)
+        assertThat(restoreResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // SUCCESS
         result = testObserver.events[0][1] as Result
@@ -275,7 +275,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(restoreResult.error).isNull()
         assertThat(restoreResult.result).isNotEmpty
         assertThat(restoreResult.result).hasSize(5)
-        assertThat(restoreResult.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(restoreResult.type).isEqualTo(Result.SUCCESS)
     }
 
     @Test
@@ -321,7 +321,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(restoreResult.pageNumber).isEqualTo(pageNumber)
         assertThat(restoreResult.error).isNull()
         assertThat(restoreResult.result).isNull()
-        assertThat(restoreResult.type).isEqualTo(Result.ResultType.IN_FLIGHT)
+        assertThat(restoreResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // FAILURE
         result = testObserver.events[0][1] as Result
@@ -331,9 +331,9 @@ class NowPlayingInteractorTest : RxJavaTest() {
         restoreResult = result as RestoreResult
         assertThat(restoreResult.pageNumber).isEqualTo(pageNumber)
         assertThat(restoreResult.error).isNotNull()
-        assertThat(restoreResult.error.message).isEqualTo(errorMessage)
+        assertThat(restoreResult.error?.message).isEqualTo(errorMessage)
         assertThat(restoreResult.result).isNull()
-        assertThat(restoreResult.type).isEqualTo(Result.ResultType.FAILURE)
+        assertThat(restoreResult.type).isEqualTo(Result.FAILURE)
 
         // SUCCESS
         result = testObserver.events[0][2] as Result
@@ -345,10 +345,10 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(restoreResult.error).isNull()
         assertThat(restoreResult.result).isNotEmpty
         assertThat(restoreResult.result).hasSize(5)
-        assertThat(restoreResult.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(restoreResult.type).isEqualTo(Result.SUCCESS)
 
         for (i in 0..4) {
-            assertThat(restoreResult.result[i]).isEqualTo(movieInfo)
+            assertThat(restoreResult.result!![i]).isEqualTo(movieInfo)
         }
     }
 
@@ -422,9 +422,9 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(result).isInstanceOf(FilterResult::class.java)
 
         val filterResult = result as FilterResult
-        assertThat(filterResult.filteredList.containsAll(movieInfoList))
+        assertThat(filterResult.filteredList?.containsAll(movieInfoList))
         assertThat(filterResult.isFilterOn).isTrue()
-        assertThat(filterResult.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(filterResult.type).isEqualTo(Result.SUCCESS)
     }
 
     @Test
@@ -473,7 +473,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
         assertThat(scrollResult.result).isNull()
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.IN_FLIGHT)
+        assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // SUCCESS
         result = testObserver.events[0][1] as Result
@@ -484,7 +484,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
         assertThat(scrollResult.result).isEmpty()
-        assertThat(scrollResult.type).isEqualTo(Result.ResultType.SUCCESS)
+        assertThat(scrollResult.type).isEqualTo(Result.SUCCESS)
     }
 
     /**

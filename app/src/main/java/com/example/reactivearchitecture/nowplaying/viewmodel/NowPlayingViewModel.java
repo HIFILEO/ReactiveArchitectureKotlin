@@ -260,7 +260,7 @@ public class NowPlayingViewModel extends ViewModel {
         UiModel.UiModelBuilder uiModelBuilder = new UiModel.UiModelBuilder(uiModel);
 
         switch (scrollResult.getType()) {
-            case Result.ResultType.IN_FLIGHT:
+            case Result.IN_FLIGHT:
                 //In Progress
                 uiModelBuilder
                         .setFirstTimeLoad(scrollResult.getPageNumber() == 1)
@@ -271,7 +271,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setAdapterCommandType(scrollResult.getPageNumber() == 1
                                 ? AdapterCommandType.DO_NOTHING : AdapterCommandType.SHOW_IN_PROGRESS);
                 break;
-            case Result.ResultType.SUCCESS:
+            case Result.SUCCESS:
                 List<MovieViewInfo> listToAdd = translateResultsForUi(scrollResult.getResult());
                 List<MovieViewInfo> currentList = uiModel.getCurrentList();
                 currentList.addAll(listToAdd);
@@ -286,7 +286,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setResultList(listToAdd)
                         .setAdapterCommandType(AdapterCommandType.ADD_DATA_REMOVE_IN_PROGRESS);
                 break;
-            case Result.ResultType.FAILURE:
+            case Result.FAILURE:
                 Timber.e(scrollResult.getError());
 
                 //Failure
@@ -324,7 +324,7 @@ public class NowPlayingViewModel extends ViewModel {
         }
 
         switch (restoreResult.getType()) {
-            case Result.ResultType.IN_FLIGHT:
+            case Result.IN_FLIGHT:
                 //In Progress
                 uiModelBuilder
                         .setFirstTimeLoad(true)
@@ -336,7 +336,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setAdapterCommandType(listToAdd == null || listToAdd.isEmpty()
                                 ? AdapterCommandType.DO_NOTHING : AdapterCommandType.ADD_DATA_ONLY);
                 break;
-            case Result.ResultType.SUCCESS:
+            case Result.SUCCESS:
                 //Success
                 uiModelBuilder
                         .setFirstTimeLoad(false)
@@ -347,7 +347,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setResultList(listToAdd)
                         .setAdapterCommandType(AdapterCommandType.ADD_DATA_ONLY);
                 break;
-            case Result.ResultType.FAILURE:
+            case Result.FAILURE:
                 Timber.e(restoreResult.getError());
 
                 //Error
@@ -377,10 +377,10 @@ public class NowPlayingViewModel extends ViewModel {
         UiModel.UiModelBuilder uiModelBuilder = new UiModel.UiModelBuilder(uiModel);
 
         switch (filterResult.getType()) {
-            case Result.ResultType.IN_FLIGHT:
+            case Result.IN_FLIGHT:
                 Timber.i("Filter - IN_FLIGHT");
                 break;
-            case Result.ResultType.SUCCESS:
+            case Result.SUCCESS:
                 //Success
                 uiModelBuilder
                         .setCurrentList(translateResultsForUi(filterResult.getFilteredList()))
@@ -388,7 +388,7 @@ public class NowPlayingViewModel extends ViewModel {
                         .setResultList(null)
                         .setAdapterCommandType(AdapterCommandType.SWAP_LIST_DUE_TO_NEW_FILTER);
                 break;
-            case Result.ResultType.FAILURE:
+            case Result.FAILURE:
                 Timber.e("Failure during filter. Throw error, this should never happen.");
                 throw new IllegalArgumentException("Failure during filter. This should never happen.");
             default:

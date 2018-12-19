@@ -17,29 +17,31 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.model.result;
+package com.example.reactivearchitecture.nowplaying.model.result
 
-import android.support.annotation.IntDef;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import android.support.annotation.IntDef
 
 /**
  * Base class for results from asynchronous actions.
+ *
+ * Note - IntDef in Kotlin not easy
+ * https://medium.com/@xzan/the-drawbacks-of-migrating-to-kotlin-51f49a96107a
  */
-public abstract class Result {
+abstract class Result {
 
-    public abstract @ResultType int getType();
+    @get:ResultType
+    abstract val type: Int
 
     /**
-     * Hi.
+     * Kotlin IntDef
      */
-    @IntDef({ResultType.IN_FLIGHT, ResultType.SUCCESS, ResultType.FAILURE})
-    @Retention(RetentionPolicy.SOURCE)
-    @SuppressWarnings("checkstyle:abbreviationaswordinname")
-    public @interface ResultType {
-        int IN_FLIGHT = 0;
-        int SUCCESS = 1;
-        int FAILURE = 2;
+    @IntDef(IN_FLIGHT, SUCCESS, FAILURE)
+    @Retention(AnnotationRetention.SOURCE)
+    annotation class ResultType
+
+    companion object {
+        const val IN_FLIGHT = 0
+        const val SUCCESS = 1
+        const val FAILURE = 2
     }
 }

@@ -71,7 +71,7 @@ class NowPlayingInteractor(
                         .flatMap(MovieListFetcher())
                         .flatMap { movieInfos: List<MovieInfo> ->
                             Observable.just(
-                                    ScrollResult.sucess(
+                                    ScrollResult.success(
                                             scrollAction.pageNumber,
                                             movieInfos
                                     ))
@@ -121,7 +121,7 @@ class NowPlayingInteractor(
                                         )
                                         if (pageNumber == restoreAction.pageNumberToRestore) {
                                             Observable.just(
-                                                    RestoreResult.sucess(pageNumber, movieInfos))
+                                                    RestoreResult.success(pageNumber, movieInfos))
                                         } else {
                                             Observable.just(
                                                     RestoreResult.inFlight(pageNumber, movieInfos))
