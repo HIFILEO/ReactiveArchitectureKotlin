@@ -17,22 +17,14 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.service;
+package com.example.reactivearchitecture.nowplaying.service
 
 /**
  * Service response based on:
  * https://developers.themoviedb.org/3/movies/get-now-playing
  * .
  */
-public class Dates {
-    private String maximum;
-    private String minimum;
-
-    public String getMaximum() {
-        return maximum;
-    }
-
-    public String getMinimum() {
-        return minimum;
-    }
+class Dates {
+    val maximum: String? = null
+    val minimum: String? = null
 }

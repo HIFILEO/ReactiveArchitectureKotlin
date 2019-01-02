@@ -95,12 +95,12 @@ class ServiceControllerImpl(
                     javaClass.simpleName)
             val movieInfoList = ArrayList<MovieInfo>()
 
-            for (i in 0 until serviceResponse.results.size) {
+            for (i in 0 until (serviceResponse.results?.size ?: 0)) {
                 val movieInfo = MovieInfoImpl(
-                        imageUrlPath + serviceResponse.results[i].poster_path,
-                        serviceResponse.results[i].title,
-                        dateFormat.parse(serviceResponse.results[i].release_date),
-                        serviceResponse.results[i].vote_average)
+                        imageUrlPath + serviceResponse.results?.get(i)?.poster_path,
+                        serviceResponse.results?.get(i)?.title ?: "",
+                        dateFormat.parse(serviceResponse.results?.get(i)?.release_date),
+                        serviceResponse.results?.get(i)?.vote_average ?: 0.toDouble())
 
                 movieInfoList.add(movieInfo)
             }

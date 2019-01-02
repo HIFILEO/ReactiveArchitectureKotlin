@@ -17,23 +17,16 @@ PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS 
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-package com.example.reactivearchitecture.nowplaying.service;
-
-import java.util.Map;
-
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
+package com.example.reactivearchitecture.nowplaying.service
 
 /**
- * Retrofit Interface.
+ * Service response based on:
+ * https://developers.themoviedb.org/3/movies/get-now-playing
  */
-public interface ServiceApi {
-
-    @GET("now_playing")
-    Observable<ServiceResponse> nowPlaying(
-            @Query("api_key") String api_key,
-            @QueryMap Map<String, Integer> query);
+class ServiceResponse {
+    val page: Int = 0
+    val results: Array<Results>? = null
+    val dates: Dates? = null
+    val total_pages: Int = 0
+    val total_results: Int = 0
 }
