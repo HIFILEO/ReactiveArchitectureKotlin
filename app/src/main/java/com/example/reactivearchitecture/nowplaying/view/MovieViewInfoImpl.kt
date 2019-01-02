@@ -17,37 +17,35 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.view;
+package com.example.reactivearchitecture.nowplaying.view
+
+import android.annotation.SuppressLint
+
+import com.example.reactivearchitecture.nowplaying.model.FilterManager
+import com.example.reactivearchitecture.nowplaying.model.MovieInfo
+
+import java.text.SimpleDateFormat
 
 /**
- * Item to represent a filter view.
+ * View representation of movie information. The business logic for data manipulation that is
+ * handled by the view data.
  */
-public class FilterView {
-    private String filterText;
-    private int drawableResource;
-    private boolean filterOn;
+class MovieViewInfoImpl(private val movieInfo: MovieInfo) : MovieViewInfo {
+    @SuppressLint("SimpleDateFormat")
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
-    /**
-     * Constructor.
-     * @param filterText - Text to show.
-     * @param drawableResource - drawable resource to show
-     * @param filterOn - true when filter is on, false otherwise
-     */
-    public FilterView(String filterText, int drawableResource, boolean filterOn) {
-        this.filterText = filterText;
-        this.drawableResource = drawableResource;
-        this.filterOn = filterOn;
-    }
+    override val pictureUrl: String
+        get() = movieInfo.pictureUrl
 
-    public String getFilterText() {
-        return filterText;
-    }
+    override val title: String
+        get() = movieInfo.title
 
-    public int getDrawableResource() {
-        return drawableResource;
-    }
+    override val releaseDate: String
+        get() = dateFormat.format(movieInfo.releaseDate)
 
-    public boolean isFilterOn() {
-        return filterOn;
-    }
+    override val rating: String
+        get() = Math.round(movieInfo.rating).toString() + "/10"
+
+    override val isHighRating: Boolean
+        get() = Math.round(movieInfo.rating) >= FilterManager.RATE_NUMBER_TO_STAR
 }
