@@ -17,19 +17,19 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTH
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.reactivearchitecture.nowplaying.view;
+package com.example.reactivearchitecture.nowplaying.view
 
 /**
  * View representation of movie information. Used in adpaters.
  */
-public interface MovieViewInfo {
-    String getPictureUrl();
+interface MovieViewInfo {
+    val pictureUrl: String
 
-    String getTitle();
+    val title: String
 
-    String getReleaseDate();
+    val releaseDate: String
 
-    String getRating();
+    val rating: String
 
-    boolean isHighRating();
+    val isHighRating: Boolean
 }
