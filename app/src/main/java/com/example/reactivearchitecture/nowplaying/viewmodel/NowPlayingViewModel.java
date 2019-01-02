@@ -124,7 +124,7 @@ public class NowPlayingViewModel extends ViewModel {
     public void init(@Nullable  UiModel restoredUiModel) {
         if (initialUiModel == null) {
             if (restoredUiModel == null) {
-                initialUiModel = UiModel.initState();
+                initialUiModel = UiModel.Companion.initState();
                 startEventsObservable = Observable.just((UiEvent) new ScrollEvent(initialUiModel.getPageNumber() + 1));
             } else {
                 //restore required

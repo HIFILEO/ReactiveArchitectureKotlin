@@ -240,7 +240,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
         // Test List Data
-        val movieViewInfo = uiModel.resultList[0]
+        val movieViewInfo: MovieViewInfo = uiModel.resultList!![0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -341,7 +341,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(1)
 
-        var movieViewInfo = uiModel.resultList[0]
+        var movieViewInfo = uiModel.resultList!![0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -374,7 +374,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
         // test result
-        movieViewInfo = uiModel.resultList[0]
+        movieViewInfo = uiModel.resultList!![0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -382,14 +382,14 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(movieViewInfo.isHighRating).isTrue()
 
         // test full list
-        movieViewInfo = uiModel.currentList[0]
+        movieViewInfo = uiModel.currentList!![0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
                 .toString() + "/10")
         assertThat(movieViewInfo.isHighRating).isTrue()
 
-        movieViewInfo = uiModel.currentList[1]
+        movieViewInfo = uiModel.currentList!![1]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -476,7 +476,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
         // check values
-        val movieViewInfo = uiModel.currentList[0]
+        val movieViewInfo = uiModel.currentList!![0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
