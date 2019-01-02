@@ -401,7 +401,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         }
 
         whenever(mockFilterManager.isFilterOn).thenReturn(true)
-        whenever(mockFilterManager.fullList).thenReturn(movieInfoList)
+        whenever(mockFilterManager.getFullList()).thenReturn(movieInfoList)
 
         //
         // Act
