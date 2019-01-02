@@ -74,7 +74,7 @@ class FilterTransformer(private val filterManager: FilterManager) {
 
                 FilterResult.success(
                         filterManager.isFilterOn,
-                        filterManager.fullList
+                        filterManager.getFullList()
                 )
             }
         }

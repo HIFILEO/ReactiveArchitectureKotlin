@@ -63,6 +63,6 @@ public class MovieViewInfoImpl implements MovieViewInfo {
 
     @Override
     public boolean isHighRating() {
-        return Math.round(movieInfo.getRating()) >= FilterManager.RATE_NUMBER_TO_STAR;
+        return Math.round(movieInfo.getRating()) >= FilterManager.Companion.getRATE_NUMBER_TO_STAR();
     }
 }
