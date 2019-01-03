@@ -185,7 +185,7 @@ class UiModel : Parcelable {
             return this
         }
 
-        fun setCurrentList(currentList: List<MovieViewInfo>): UiModelBuilder {
+        fun setCurrentList(currentList: List<MovieViewInfo?>): UiModelBuilder {
             this.currentList = currentList
             return this
         }

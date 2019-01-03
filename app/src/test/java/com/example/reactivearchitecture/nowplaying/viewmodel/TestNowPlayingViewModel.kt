@@ -24,8 +24,4 @@ class TestNowPlayingViewModel(
         super.nowPlayingInteractor = nowPlayingInteractor
         super.filterManager = filterManager
     }
-
-    override fun createNonInjectedData() {
-        // Do Nothing
-    }
 }

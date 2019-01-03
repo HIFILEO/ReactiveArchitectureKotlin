@@ -101,7 +101,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -145,7 +145,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -212,7 +212,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -293,7 +293,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -442,7 +442,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -540,7 +540,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         //
         // Act
         //
-        testObserver = nowPlayingViewModel.uiModels.test()
+        testObserver = nowPlayingViewModel.uiModels!!.test()
         testScheduler.triggerActions()
 
         //
@@ -563,7 +563,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(2)
     }
 
-    public inner class TestTransformer {
+    inner class TestTransformer {
         internal fun transform(action: Action): Observable<Result> {
             return Observable.empty()
         }

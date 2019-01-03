@@ -191,7 +191,8 @@ class NowPlayingActivity : BaseActivity() {
         //
         // Bind to UiModel
         //
-        compositeDisposable.add(nowPlayingViewModel.uiModels
+        compositeDisposable.add(
+                requireNotNull(nowPlayingViewModel.uiModels) {"UiModel is null in bind()"}
                 .subscribe(
                         { this.processUiModel(it) },
                         { throw UnsupportedOperationException(
