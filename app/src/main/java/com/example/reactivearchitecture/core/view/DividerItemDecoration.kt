@@ -1,4 +1,3 @@
-// CHECKSTYLE:OFF
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
