@@ -100,7 +100,7 @@ class FilterManagerTest {
         // Act
         //
         filterManager.filterList(movieInfoFullList)
-        val listToTest = filterManager.fullList
+        val listToTest = filterManager.getFullList()
 
         //
         // Assert
@@ -123,7 +123,7 @@ class FilterManagerTest {
         // Act
         //
         filterManager.filterList(movieInfoFullList)
-        val listToTest = filterManager.fullList
+        val listToTest = filterManager.getFullList()
 
         //
         // Assert
