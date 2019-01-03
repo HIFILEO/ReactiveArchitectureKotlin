@@ -8,16 +8,13 @@ This document describes the code style standards and static analysis tools confi
 
 The general code style for this project can be read in detail on the [wiki](https://google.github.io/styleguide/javaguide.html).
 
-### CheckStyle
+### ktlint
 
-The project has [checkstyle](http://checkstyle.sourceforge.net/) configured to ensure the code conforms to formatting and style standards.
-The specific checkstyle rules and constraints for this project are found
-in [config/checkstyle/checkstyle.xml](https://github.com/HIFILEO/MVVMReactive/blob/master/config/checkstyle/checkstyle.xml) file that is in git for this project.
+An anti-bikeshedding [Kotlin linter](https://ktlint.github.io/) with built-in formatter.
 
-To run checkstyle against your project
+To run ktlint against your project
 
-1. `./gradlew clean checkstyle`
-
+1. `./gradlew clean ktlintCheck`
 
 ### Lint
 
