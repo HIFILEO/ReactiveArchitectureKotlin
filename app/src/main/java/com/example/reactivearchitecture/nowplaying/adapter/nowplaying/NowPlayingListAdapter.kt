@@ -35,7 +35,7 @@ import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
  * @param objects - list of [MovieViewInfo]
  */
 class NowPlayingListAdapter(objects: MutableList<MovieViewInfo?>)
-    : RecyclerArrayAdapter<MovieViewInfo, BaseViewHolder>(objects) {
+    : RecyclerArrayAdapter<MovieViewInfo?, BaseViewHolder>(objects) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

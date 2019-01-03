@@ -40,7 +40,7 @@ class UiModel : Parcelable {
         private set
     var isEnableScrollListener: Boolean = false
         private set
-    var currentList: List<MovieViewInfo>? = null
+    var currentList: List<MovieViewInfo?>? = null
         private set
         get() {
             return ArrayList(field)
@@ -69,7 +69,7 @@ class UiModel : Parcelable {
         failureMsg: String?,
         pageNumber: Int,
         enableScrollListener: Boolean,
-        currentList: List<MovieViewInfo>?,
+        currentList: List<MovieViewInfo?>?,
         resultList: List<MovieViewInfo>?,
         adapterCommandType: Int,
         filterOn: Boolean
@@ -113,7 +113,7 @@ class UiModel : Parcelable {
         private var failureMsg: String? = null
         private var pageNumber: Int = 0
         private var enableScrollListener: Boolean = false
-        private var currentList: List<MovieViewInfo>? = null
+        private var currentList: List<MovieViewInfo?>? = null
         private var resultList: List<MovieViewInfo>? = null
         @AdapterCommand.AdapterCommandType
         private var adapterCommandType: Int = 0

@@ -324,7 +324,7 @@ class NowPlayingActivityTest {
 
             val recyclerView = view as RecyclerView
             val adapter = recyclerView.adapter
-            assertThat(adapter!!.itemCount, Matchers.`is`(9))
+            assertThat(adapter!!.itemCount, Matchers.`is`(10))
 
             assertThat(adapter).isInstanceOf(NowPlayingListAdapter::class.java)
             val nowPlayingListAdapter = adapter as NowPlayingListAdapter?
