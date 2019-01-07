@@ -35,7 +35,7 @@ import java.util.Comparator
  * @constructor Creates an adapter backed by the data <T>
  */
 abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
-(private var objectList: MutableList<T?>) : RecyclerView.Adapter<V>() {
+(private var objectList: MutableList<T>) : RecyclerView.Adapter<V>() {
 
     /**
      * Adds the specified t at the end of the array.
@@ -60,7 +60,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
         return objectList.size
     }
 
-    fun getItem(position: Int): T? {
+    fun getItem(position: Int): T {
         return objectList[position]
     }
 
@@ -115,7 +115,7 @@ abstract class RecyclerArrayAdapter<T, V : RecyclerView.ViewHolder>
      *
      * @param newList - new list
      */
-    fun replace(newList: MutableList<T?>) {
+    fun replace(newList: MutableList<T>) {
         objectList = newList
         notifyDataSetChanged()
     }
