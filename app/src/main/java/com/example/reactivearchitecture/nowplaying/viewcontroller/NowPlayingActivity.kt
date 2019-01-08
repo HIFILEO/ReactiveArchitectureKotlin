@@ -292,39 +292,23 @@ class NowPlayingActivity : BaseActivity() {
         val nowPlayingListAdapter = nowPlayingListAdapter
 
         if (nowPlayingListAdapter == null) {
-            // Note, get returns a shallow-copy
-
-            // TODO - this is ugly, but baby steps
-            val uiModelCurrentList = uiModel.currentList
-            val adapterData: ArrayList<MovieViewInfo> = if (uiModelCurrentList != null) {
-                //List<MovieViewInfo?>?
-                // TODO - remove null from uiModel - this is a temp - UiModel should be vals not var
-                var tempList: MutableList<MovieViewInfo> = mutableListOf()
-                for (movieViewInfo: MovieViewInfo? in uiModelCurrentList) {
-                    if (movieViewInfo != null) {
-                        tempList.add(movieViewInfo)
-                    }
-                }
-
-                tempList as ArrayList<MovieViewInfo>
+            // create adapter data
+            val adapterData: ArrayList<MovieViewInfo> = if (uiModel.currentList.isEmpty()) {
+                ArrayList()
             } else {
-                emptyList<MovieViewInfo>() as ArrayList<MovieViewInfo>
+                uiModel.currentList as ArrayList<MovieViewInfo>
             }
 
-            // Process last adapter command
-            adapterData?.let {
-                if (uiModel.adapterCommandType == AdapterCommand.ADD_DATA_ONLY
-                        || uiModel.adapterCommandType == AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS
-                        || uiModel.adapterCommandType == AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER
-                ) {
-                    adapterData.addAll(uiModel.resultList!!)
-                } else if (uiModel.adapterCommandType == AdapterCommand.SHOW_IN_PROGRESS) {
+            when(uiModel.adapterCommandType) {
+                AdapterCommand.ADD_DATA_ONLY, AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS,
+                AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER ->
+                    adapterData.addAll(uiModel.resultList)
+                AdapterCommand.SHOW_IN_PROGRESS ->
                     adapterData.add(InProgresMovieViewInfoImpl())
-                }
-
-                // create adapter
-                createAdapter(it)
             }
+
+            // create adapter
+            createAdapter(adapterData)
 
             // Restore adapter state
             if (savedRecyclerLayoutState != null) {
@@ -340,17 +324,15 @@ class NowPlayingActivity : BaseActivity() {
                     if (nowPlayingListAdapter.itemCount > 0) {
                         val itemToRemove = nowPlayingListAdapter.getItem(
                                 nowPlayingListAdapter.itemCount - 1)
-                        itemToRemove?.let {
-                            nowPlayingListAdapter.remove(itemToRemove)
-                        }
+                        nowPlayingListAdapter.remove(itemToRemove)
                     }
 
                     // Add Data
-                    nowPlayingListAdapter.addList(uiModel.resultList!!)
+                    nowPlayingListAdapter.addList(uiModel.resultList)
                 }
                 AdapterCommand.ADD_DATA_ONLY ->
                     // Add Data
-                    nowPlayingListAdapter.addList(uiModel.resultList!!)
+                    nowPlayingListAdapter.addList(uiModel.resultList)
                 AdapterCommand.SHOW_IN_PROGRESS -> {
                     // Add null to adapter. Null shows spinner in Adapter logic.
                     nowPlayingListAdapter.add(InProgresMovieViewInfoImpl())
@@ -359,28 +341,21 @@ class NowPlayingActivity : BaseActivity() {
                     )
                 }
                 AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER -> {
-                    // TODO - Fix Ugly
-                    val uiModelCurrentList = uiModel.currentList
-                    val currentList: MutableList<MovieViewInfo> = if (uiModelCurrentList != null) {
-                        var tempList: MutableList<MovieViewInfo> = mutableListOf()
-                        for (movieViewInfo: MovieViewInfo? in uiModelCurrentList) {
-                            if (movieViewInfo != null) {
-                                tempList.add(movieViewInfo)
-                            }
-                        }
-
-                        tempList as ArrayList<MovieViewInfo>
+                    // create adapter data
+                    val adapterData: ArrayList<MovieViewInfo> = if (uiModel.currentList.isEmpty()) {
+                        ArrayList()
                     } else {
-                        emptyList<MovieViewInfo>() as ArrayList<MovieViewInfo>
+                        uiModel.currentList as ArrayList<MovieViewInfo>
                     }
 
                     // Check if loading was in progress
                     val itemCount = nowPlayingListAdapter.itemCount
-                    if (itemCount > 0 && nowPlayingListAdapter.getItem(itemCount - 1) == null) {
-                        currentList.add(InProgresMovieViewInfoImpl())
+                    if (itemCount > 0 && nowPlayingListAdapter.getItem(itemCount - 1) is InProgresMovieViewInfoImpl) {
+                        adapterData.add(InProgresMovieViewInfoImpl())
                     }
 
-                    nowPlayingListAdapter.replace(currentList)
+                    //swap
+                    nowPlayingListAdapter.replace(adapterData)
                 }
             }
         }
@@ -388,7 +363,7 @@ class NowPlayingActivity : BaseActivity() {
         //
         // Error Messages
         //
-        if (uiModel.failureMsg != null && !uiModel.failureMsg!!.isEmpty()) {
+        if (uiModel.failureMsg != null && !uiModel.failureMsg.isEmpty()) {
             Toast.makeText(this@NowPlayingActivity, R.string.error_msg, Toast.LENGTH_LONG).show()
         }
     }

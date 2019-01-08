@@ -25,41 +25,27 @@ import android.os.Parcelable
 import com.example.reactivearchitecture.nowplaying.model.AdapterCommand
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
 
-import java.util.ArrayList
-
 /**
  * The model the UI will bind to.
  * Note - fields in this class should be immutable for "Scan" safety.
  */
 class UiModel : Parcelable {
-    var isFirstTimeLoad: Boolean = false
-        private set
-    var failureMsg: String? = null
-        private set
-    var pageNumber: Int = 0
-        private set
-    var isEnableScrollListener: Boolean = false
-        private set
-    var currentList: List<MovieViewInfo?>? = null
-        private set
-        get() {
-            return ArrayList(field)
-        }
-    var resultList: List<MovieViewInfo>? = null
-        private set
-    @AdapterCommand.AdapterCommandType
-    var adapterCommandType: Int = 0
-        private set
-    var isFilterOn: Boolean = false
-        private set
+    val isFirstTimeLoad: Boolean
+    val failureMsg: String?
+    val pageNumber: Int
+    var isEnableScrollListener: Boolean
+    var currentList: List<MovieViewInfo>
+    var resultList: List<MovieViewInfo>
+    @AdapterCommand.AdapterCommandType var adapterCommandType: Int
+    var isFilterOn: Boolean
 
     protected constructor(`in`: Parcel) {
         this.isFirstTimeLoad = false
         this.failureMsg = null
         this.pageNumber = `in`.readInt()
         this.isEnableScrollListener = false
-        this.currentList = null
-        this.resultList = null
+        this.currentList = emptyList()
+        this.resultList = emptyList()
         this.adapterCommandType = AdapterCommand.DO_NOTHING
         this.isFilterOn = `in`.readByte().toInt() != 0
     }
@@ -69,8 +55,8 @@ class UiModel : Parcelable {
         failureMsg: String?,
         pageNumber: Int,
         enableScrollListener: Boolean,
-        currentList: List<MovieViewInfo?>?,
-        resultList: List<MovieViewInfo>?,
+        currentList: List<MovieViewInfo>,
+        resultList: List<MovieViewInfo>,
         adapterCommandType: Int,
         filterOn: Boolean
     ) {
@@ -94,14 +80,6 @@ class UiModel : Parcelable {
         parcel.writeByte((if (isFilterOn) 1 else 0).toByte())
     }
 
-//    /**
-//     * Return a shallow copy of the current list.
-//     * @return Shallow copy of list.
-//     */
-//    fun getCurrentList(): List<MovieViewInfo> {
-//        return ArrayList(currentList!!)
-//    }
-
     /**
      * Too many state? Too many params in constructors? Call on the builder pattern to Save The Day!.
      * TODO - get rid of builder pattern and use named parameters
@@ -113,8 +91,8 @@ class UiModel : Parcelable {
         private var failureMsg: String? = null
         private var pageNumber: Int = 0
         private var enableScrollListener: Boolean = false
-        private var currentList: List<MovieViewInfo?>? = null
-        private var resultList: List<MovieViewInfo>? = null
+        private var currentList: List<MovieViewInfo> = emptyList()
+        private var resultList: List<MovieViewInfo> = emptyList()
         @AdapterCommand.AdapterCommandType
         private var adapterCommandType: Int = 0
         private var filterOn: Boolean = false
@@ -145,14 +123,6 @@ class UiModel : Parcelable {
          * @return new [UiModel].
          */
         fun createUiModel(): UiModel {
-            if (currentList == null) {
-                if (uiModel == null) {
-                    currentList = ArrayList()
-                } else {
-                    // shallow copy
-                    currentList = uiModel.currentList
-                }
-            }
 
             return UiModel(
                     firstTimeLoad,
@@ -185,12 +155,12 @@ class UiModel : Parcelable {
             return this
         }
 
-        fun setCurrentList(currentList: List<MovieViewInfo?>): UiModelBuilder {
+        fun setCurrentList(currentList: List<MovieViewInfo>): UiModelBuilder {
             this.currentList = currentList
             return this
         }
 
-        fun setResultList(resultList: List<MovieViewInfo>?): UiModelBuilder {
+        fun setResultList(resultList: List<MovieViewInfo>): UiModelBuilder {
             this.resultList = resultList
             return this
         }
@@ -231,8 +201,8 @@ class UiModel : Parcelable {
                     null,
                     0,
                     false,
-                    ArrayList(),
-                    null,
+                    emptyList(),
+                    emptyList(),
                     AdapterCommand.DO_NOTHING,
                     false
             )

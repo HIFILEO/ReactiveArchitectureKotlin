@@ -258,15 +258,14 @@ open class NowPlayingViewModel @Inject constructor(
                         .setFailureMsg(null)
                         .setPageNumber(scrollResult.pageNumber)
                         .setEnableScrollListener(false)
-                        .setResultList(null)
+                        .setResultList(emptyList())
                         .setAdapterCommandType(if (scrollResult.pageNumber == 1)
                             AdapterCommand.DO_NOTHING
                         else
                             AdapterCommand.SHOW_IN_PROGRESS)
             Result.SUCCESS -> {
                 val listToAdd = translateResultsForUi(scrollResult.result!!)
-                val currentList: MutableList<MovieViewInfo?> = uiModel.currentList?.toMutableList()
-                        ?: emptyList<MovieViewInfo?>().toMutableList()
+                val currentList: MutableList<MovieViewInfo> = uiModel.currentList.toMutableList()
                 currentList.addAll(listToAdd)
 
                 //Success
@@ -288,7 +287,7 @@ open class NowPlayingViewModel @Inject constructor(
                         .setFailureMsg(application.getString(R.string.error_msg))
                         .setPageNumber(scrollResult.pageNumber - 1)
                         .setEnableScrollListener(false)
-                        .setResultList(null)
+                        .setResultList(emptyList())
                         .setAdapterCommandType(AdapterCommand.DO_NOTHING)
             }
             else ->
@@ -308,9 +307,8 @@ open class NowPlayingViewModel @Inject constructor(
     private fun processRestoreResult(uiModel: UiModel, restoreResult: RestoreResult): UiModel {
         val uiModelBuilder = UiModel.UiModelBuilder(uiModel)
 
-        var listToAdd: List<MovieViewInfo>? = null
-        val currentList: MutableList<MovieViewInfo?> = uiModel.currentList?.toMutableList()
-                ?: emptyList<MovieViewInfo?>().toMutableList()
+        var listToAdd: List<MovieViewInfo> = emptyList()
+        val currentList: MutableList<MovieViewInfo> = uiModel.currentList.toMutableList()
 
         if (restoreResult.result != null && !restoreResult.result.isEmpty()) {
             listToAdd = translateResultsForUi(restoreResult.result)
@@ -327,7 +325,7 @@ open class NowPlayingViewModel @Inject constructor(
                         .setEnableScrollListener(false)
                         .setCurrentList(currentList)
                         .setResultList(listToAdd)
-                        .setAdapterCommandType(if (listToAdd == null || listToAdd.isEmpty())
+                        .setAdapterCommandType(if (listToAdd.isEmpty())
                             AdapterCommand.DO_NOTHING
                         else
                             AdapterCommand.ADD_DATA_ONLY)
@@ -350,7 +348,7 @@ open class NowPlayingViewModel @Inject constructor(
                         .setFailureMsg(application.getString(R.string.error_msg))
                         .setPageNumber(restoreResult.pageNumber - 1)
                         .setEnableScrollListener(false)
-                        .setResultList(null)
+                        .setResultList(emptyList())
                         .setAdapterCommandType(AdapterCommand.DO_NOTHING)
             }
             else ->
@@ -377,7 +375,7 @@ open class NowPlayingViewModel @Inject constructor(
                 uiModelBuilder
                         .setCurrentList(translateResultsForUi(filterResult.filteredList!!))
                         .setFilterOn(filterResult.isFilterOn)
-                        .setResultList(null)
+                        .setResultList(emptyList())
                         .setAdapterCommandType(AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER)
             Result.FAILURE -> {
                 Timber.e("Failure during filter. Throw error, this should never happen.")
