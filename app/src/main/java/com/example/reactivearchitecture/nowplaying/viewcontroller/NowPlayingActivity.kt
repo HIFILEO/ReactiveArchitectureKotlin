@@ -45,7 +45,7 @@ import com.example.reactivearchitecture.nowplaying.model.event.FilterEvent
 import com.example.reactivearchitecture.nowplaying.model.event.ScrollEvent
 import com.example.reactivearchitecture.nowplaying.model.uimodel.UiModel
 import com.example.reactivearchitecture.nowplaying.view.FilterView
-import com.example.reactivearchitecture.nowplaying.view.InProgresMovieViewInfoImpl
+import com.example.reactivearchitecture.nowplaying.view.InProgressMovieViewInfoImpl
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
 import com.example.reactivearchitecture.nowplaying.viewmodel.NowPlayingViewModel
 import com.jakewharton.rxbinding2.support.v7.widget.RxRecyclerView
@@ -224,8 +224,7 @@ class NowPlayingActivity : BaseActivity() {
 
                     // Only handle 'is at end' of list scroll events
                     if (scrollEventCalculator.isAtScrollEnd) {
-                        val scrollEvent = ScrollEvent()
-                        scrollEvent.pageNumber = (latestUiModel?.pageNumber ?: 0) + 1
+                        val scrollEvent = ScrollEvent((latestUiModel?.pageNumber ?: 0) + 1)
                         Observable.just(scrollEvent)
                     } else {
                         Observable.empty()
@@ -304,7 +303,7 @@ class NowPlayingActivity : BaseActivity() {
                 AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER ->
                     adapterData.addAll(uiModel.resultList)
                 AdapterCommand.SHOW_IN_PROGRESS ->
-                    adapterData.add(InProgresMovieViewInfoImpl())
+                    adapterData.add(InProgressMovieViewInfoImpl())
             }
 
             // create adapter
@@ -335,7 +334,7 @@ class NowPlayingActivity : BaseActivity() {
                     nowPlayingListAdapter.addList(uiModel.resultList)
                 AdapterCommand.SHOW_IN_PROGRESS -> {
                     // Add null to adapter. Null shows spinner in Adapter logic.
-                    nowPlayingListAdapter.add(InProgresMovieViewInfoImpl())
+                    nowPlayingListAdapter.add(InProgressMovieViewInfoImpl())
                     nowPlayingBinding.recyclerView.scrollToPosition(
                             nowPlayingListAdapter.itemCount - 1
                     )
@@ -350,8 +349,8 @@ class NowPlayingActivity : BaseActivity() {
 
                     // Check if loading was in progress
                     val itemCount = nowPlayingListAdapter.itemCount
-                    if (itemCount > 0 && nowPlayingListAdapter.getItem(itemCount - 1) is InProgresMovieViewInfoImpl) {
-                        adapterData.add(InProgresMovieViewInfoImpl())
+                    if (itemCount > 0 && nowPlayingListAdapter.getItem(itemCount - 1) is InProgressMovieViewInfoImpl) {
+                        adapterData.add(InProgressMovieViewInfoImpl())
                     }
 
                     //swap
@@ -363,7 +362,7 @@ class NowPlayingActivity : BaseActivity() {
         //
         // Error Messages
         //
-        if (uiModel.failureMsg != null && !uiModel.failureMsg.isEmpty()) {
+        if (!uiModel.failureMsg.isEmpty()) {
             Toast.makeText(this@NowPlayingActivity, R.string.error_msg, Toast.LENGTH_LONG).show()
         }
     }

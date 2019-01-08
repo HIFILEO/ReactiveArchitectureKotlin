@@ -22,12 +22,4 @@ package com.example.reactivearchitecture.nowplaying.model.event
 /**
  * Scroll Events.
  */
-class ScrollEvent : UiEvent {
-    var pageNumber: Int = 0
-
-    constructor(pageNumber: Int) {
-        this.pageNumber = pageNumber
-    }
-
-    constructor() {}
-}
+class ScrollEvent(val pageNumber: Int = 0) : UiEvent()

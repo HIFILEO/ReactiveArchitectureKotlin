@@ -24,12 +24,8 @@ package com.example.reactivearchitecture.nowplaying.view
  */
 interface MovieViewInfo {
     val pictureUrl: String
-
     val title: String
-
     val releaseDate: String
-
     val rating: String
-
     val isHighRating: Boolean
 }

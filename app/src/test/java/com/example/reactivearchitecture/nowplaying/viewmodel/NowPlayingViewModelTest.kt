@@ -116,7 +116,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(0)
     }
@@ -165,7 +165,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
@@ -235,7 +235,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNotEmpty
         assertThat(uiModel.resultList).hasSize(1)
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isTrue()
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
@@ -313,7 +313,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
@@ -324,7 +324,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(1)
 
@@ -337,7 +337,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNotEmpty
         assertThat(uiModel.resultList).hasSize(1)
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(1)
 
@@ -356,7 +356,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(1)
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
@@ -369,7 +369,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).hasSize(2)
         assertThat(uiModel.resultList).isNotEmpty
         assertThat(uiModel.resultList).hasSize(1)
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isTrue()
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
@@ -459,7 +459,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(movieViewInfoList.size)
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isTrue()
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
@@ -471,7 +471,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
                 AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER)
         assertThat(uiModel.currentList).hasSize(movieInfoList_HighRating.size)
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isTrue()
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
@@ -558,7 +558,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.currentList).isNotEmpty
         assertThat(uiModel.currentList).hasSize(movieViewInfoList.size)
         assertThat(uiModel.resultList).isNullOrEmpty()
-        assertThat(uiModel.failureMsg).isNull()
+        assertThat(uiModel.failureMsg).isNullOrEmpty()
         assertThat(uiModel.isEnableScrollListener).isTrue()
         assertThat(uiModel.pageNumber).isEqualTo(2)
     }

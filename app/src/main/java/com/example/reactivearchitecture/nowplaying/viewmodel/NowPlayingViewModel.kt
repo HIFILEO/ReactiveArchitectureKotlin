@@ -255,7 +255,7 @@ open class NowPlayingViewModel @Inject constructor(
                 //In Progress
                 uiModelBuilder
                         .setFirstTimeLoad(scrollResult.pageNumber == 1)
-                        .setFailureMsg(null)
+                        .setFailureMsg("")
                         .setPageNumber(scrollResult.pageNumber)
                         .setEnableScrollListener(false)
                         .setResultList(emptyList())
@@ -271,7 +271,7 @@ open class NowPlayingViewModel @Inject constructor(
                 //Success
                 uiModelBuilder
                         .setFirstTimeLoad(false)
-                        .setFailureMsg(null)
+                        .setFailureMsg("")
                         .setPageNumber(scrollResult.pageNumber)
                         .setEnableScrollListener(true)
                         .setCurrentList(currentList)
@@ -320,7 +320,7 @@ open class NowPlayingViewModel @Inject constructor(
                 //In Progress
                 uiModelBuilder
                         .setFirstTimeLoad(true)
-                        .setFailureMsg(null)
+                        .setFailureMsg("")
                         .setPageNumber(restoreResult.pageNumber)
                         .setEnableScrollListener(false)
                         .setCurrentList(currentList)
@@ -333,7 +333,7 @@ open class NowPlayingViewModel @Inject constructor(
                 //Success
                 uiModelBuilder
                         .setFirstTimeLoad(false)
-                        .setFailureMsg(null)
+                        .setFailureMsg("")
                         .setPageNumber(restoreResult.pageNumber)
                         .setEnableScrollListener(true)
                         .setCurrentList(currentList)
