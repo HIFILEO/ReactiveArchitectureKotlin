@@ -21,7 +21,7 @@ package com.example.reactivearchitecture.nowplaying.view
 /**
  * Represents an in progress [MovieViewInfo]. All fields are empty.
  */
-class InProgresMovieViewInfoImpl : MovieViewInfo {
+class InProgressMovieViewInfoImpl : MovieViewInfo {
     override val pictureUrl: String
         get() = ""
     override val title: String

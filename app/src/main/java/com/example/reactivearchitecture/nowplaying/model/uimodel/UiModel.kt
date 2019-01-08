@@ -31,7 +31,7 @@ import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
  */
 class UiModel : Parcelable {
     val isFirstTimeLoad: Boolean
-    val failureMsg: String?
+    val failureMsg: String
     val pageNumber: Int
     var isEnableScrollListener: Boolean
     var currentList: List<MovieViewInfo>
@@ -41,7 +41,7 @@ class UiModel : Parcelable {
 
     protected constructor(`in`: Parcel) {
         this.isFirstTimeLoad = false
-        this.failureMsg = null
+        this.failureMsg = ""
         this.pageNumber = `in`.readInt()
         this.isEnableScrollListener = false
         this.currentList = emptyList()
@@ -52,7 +52,7 @@ class UiModel : Parcelable {
 
     private constructor(
         firstTimeLoad: Boolean,
-        failureMsg: String?,
+        failureMsg: String,
         pageNumber: Int,
         enableScrollListener: Boolean,
         currentList: List<MovieViewInfo>,
@@ -88,7 +88,7 @@ class UiModel : Parcelable {
         private val uiModel: UiModel?
 
         private var firstTimeLoad: Boolean = false
-        private var failureMsg: String? = null
+        private var failureMsg: String = ""
         private var pageNumber: Int = 0
         private var enableScrollListener: Boolean = false
         private var currentList: List<MovieViewInfo> = emptyList()
@@ -140,7 +140,7 @@ class UiModel : Parcelable {
             return this
         }
 
-        fun setFailureMsg(failureMsg: String?): UiModelBuilder {
+        fun setFailureMsg(failureMsg: String): UiModelBuilder {
             this.failureMsg = failureMsg
             return this
         }
@@ -198,7 +198,7 @@ class UiModel : Parcelable {
         fun initState(): UiModel {
             return UiModel(
                 true,
-                    null,
+                    "",
                     0,
                     false,
                     emptyList(),
