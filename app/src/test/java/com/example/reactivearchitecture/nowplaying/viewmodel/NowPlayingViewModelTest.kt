@@ -115,7 +115,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.isFirstTimeLoad).isTrue()
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
-        assertThat(uiModel.resultList).isNull()
+        assertThat(uiModel.resultList).isEmpty()
         assertThat(uiModel.failureMsg).isNull()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(0)
@@ -164,7 +164,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.isFirstTimeLoad).isTrue()
         assertThat(uiModel.adapterCommandType).isEqualTo(AdapterCommand.DO_NOTHING)
         assertThat(uiModel.currentList).isEmpty()
-        assertThat(uiModel.resultList).isNull()
+        assertThat(uiModel.resultList).isEmpty()
         assertThat(uiModel.failureMsg).isNull()
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
@@ -240,7 +240,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
         // Test List Data
-        val movieViewInfo: MovieViewInfo = uiModel.resultList!![0]
+        val movieViewInfo: MovieViewInfo = uiModel.resultList[0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -341,7 +341,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.isEnableScrollListener).isFalse()
         assertThat(uiModel.pageNumber).isEqualTo(1)
 
-        var movieViewInfo: MovieViewInfo? = uiModel.resultList!![0]
+        var movieViewInfo: MovieViewInfo? = uiModel.resultList[0]
         assertThat(movieViewInfo?.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo?.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo?.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -374,7 +374,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(pageNumber)
 
         // test result
-        movieViewInfo = uiModel.resultList!![0]
+        movieViewInfo = uiModel.resultList[0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
@@ -382,19 +382,19 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(movieViewInfo.isHighRating).isTrue()
 
         // test full list
-        movieViewInfo = uiModel.currentList!![0]
-        assertThat(movieViewInfo?.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
-        assertThat(movieViewInfo?.title).isEqualToIgnoringCase(movieInfo.title)
-        assertThat(movieViewInfo?.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
+        movieViewInfo = uiModel.currentList[0]
+        assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
+        assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
+        assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
                 .toString() + "/10")
-        assertThat(movieViewInfo?.isHighRating).isTrue()
+        assertThat(movieViewInfo.isHighRating).isTrue()
 
-        movieViewInfo = uiModel.currentList!![1]
-        assertThat(movieViewInfo?.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
-        assertThat(movieViewInfo?.title).isEqualToIgnoringCase(movieInfo.title)
-        assertThat(movieViewInfo?.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
+        movieViewInfo = uiModel.currentList[1]
+        assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
+        assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
+        assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
                 .toString() + "/10")
-        assertThat(movieViewInfo?.isHighRating).isTrue()
+        assertThat(movieViewInfo.isHighRating).isTrue()
     }
 
     @Test
@@ -427,7 +427,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModelBuilder.setFilterOn(false)
         uiModelBuilder.setEnableScrollListener(true)
         uiModelBuilder.setFirstTimeLoad(false)
-        uiModelBuilder.setResultList(null)
+        uiModelBuilder.setResultList(emptyList())
         uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
 
         nowPlayingViewModel.init(uiModelBuilder.createUiModel())
@@ -477,11 +477,11 @@ class NowPlayingViewModelTest : RxJavaTest() {
 
         // check values
         val movieViewInfo = uiModel.currentList!![0]
-        assertThat(movieViewInfo?.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
-        assertThat(movieViewInfo?.title).isEqualToIgnoringCase(movieInfo.title)
-        assertThat(movieViewInfo?.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
+        assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
+        assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
+        assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
                 .toString() + "/10")
-        assertThat(movieViewInfo?.isHighRating).isTrue()
+        assertThat(movieViewInfo.isHighRating).isTrue()
     }
 
     @Test
@@ -522,7 +522,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         uiModelBuilder.setFilterOn(false)
         uiModelBuilder.setEnableScrollListener(true)
         uiModelBuilder.setFirstTimeLoad(false)
-        uiModelBuilder.setResultList(null)
+        uiModelBuilder.setResultList(emptyList())
         uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
 
         nowPlayingViewModel.init(uiModelBuilder.createUiModel())

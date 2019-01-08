@@ -28,14 +28,15 @@ import com.example.reactivearchitecture.R
 import com.example.reactivearchitecture.core.adapter.BaseViewHolder
 import com.example.reactivearchitecture.core.adapter.RecyclerArrayAdapter
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
+import com.example.reactivearchitecture.nowplaying.view.MovieViewInfoImpl
 
 /**
  * Adapter that shows a list of [MovieViewInfo] with continuous scrolling.
  *
- * @param objects - list of [MovieViewInfo]
+ * @param objects - list of mutable [MovieViewInfo]
  */
-class NowPlayingListAdapter(objects: MutableList<MovieViewInfo?>)
-    : RecyclerArrayAdapter<MovieViewInfo?, BaseViewHolder>(objects) {
+class NowPlayingListAdapter(objects: MutableList<MovieViewInfo>)
+    : RecyclerArrayAdapter<MovieViewInfo, BaseViewHolder>(objects) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -56,13 +57,13 @@ class NowPlayingListAdapter(objects: MutableList<MovieViewInfo?>)
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val item = getItem(position)
-        if (item != null) {
+        if (item is MovieViewInfoImpl) {
             (holder as MovieViewHolder).bind(item)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (super.getItem(position) != null) VIEW_ITEM else VIEW_PROGRESS
+        return if (super.getItem(position) is MovieViewInfoImpl) VIEW_ITEM else VIEW_PROGRESS
     }
 
     /**
