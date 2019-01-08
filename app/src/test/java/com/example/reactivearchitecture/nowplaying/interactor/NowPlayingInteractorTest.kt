@@ -128,7 +128,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         val scrollResult = result as ScrollResult
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
-        assertThat(scrollResult.result).isNull()
+        assertThat(scrollResult.result).isNullOrEmpty()
         assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // SUCCESS
@@ -190,7 +190,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         var scrollResult = result as ScrollResult
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
-        assertThat(scrollResult.result).isNull()
+        assertThat(scrollResult.result).isNullOrEmpty()
         assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // FAILURE
@@ -202,7 +202,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNotNull()
         assertThat(scrollResult.error?.message).isEqualTo(errorMessage)
-        assertThat(scrollResult.result).isNull()
+        assertThat(scrollResult.result).isNullOrEmpty()
         assertThat(scrollResult.type).isEqualTo(Result.FAILURE)
 
         // SUCCESS
@@ -472,7 +472,7 @@ class NowPlayingInteractorTest : RxJavaTest() {
         var scrollResult = result as ScrollResult
         assertThat(scrollResult.pageNumber).isEqualTo(pageNumber)
         assertThat(scrollResult.error).isNull()
-        assertThat(scrollResult.result).isNull()
+        assertThat(scrollResult.result).isNullOrEmpty()
         assertThat(scrollResult.type).isEqualTo(Result.IN_FLIGHT)
 
         // SUCCESS

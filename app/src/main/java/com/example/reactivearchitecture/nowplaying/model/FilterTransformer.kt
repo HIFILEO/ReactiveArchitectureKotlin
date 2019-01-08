@@ -41,8 +41,8 @@ class FilterTransformer(private val filterManager: FilterManager) {
                         scrollResult.isSuccessful,
                         scrollResult.isLoading,
                         scrollResult.pageNumber,
-                        if (scrollResult.result == null)
-                            null
+                        if (scrollResult.result.isEmpty())
+                            emptyList()
                         else
                             filterManager.filterList(scrollResult.result),
                         scrollResult.error
