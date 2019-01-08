@@ -25,6 +25,7 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.VisibleForTesting
 import android.support.annotation.WorkerThread
+import android.widget.Adapter
 
 import com.example.reactivearchitecture.R
 import com.example.reactivearchitecture.core.model.action.Action
@@ -159,8 +160,7 @@ open class NowPlayingViewModel @Inject constructor(
                 )
             } else {
                 //restore required
-                val uiModelBuilder = UiModel.UiModelBuilder(restoredUiModel)
-                initialUiModel = uiModelBuilder.createUiModel()
+                initialUiModel = restoredUiModel
                 startEventsObservable = Observable.just(
                         RestoreEvent(initialUiModel?.pageNumber ?: 0) as UiEvent
                 )
@@ -248,54 +248,49 @@ open class NowPlayingViewModel @Inject constructor(
      * @return new updated [UiModel]
      */
     private fun processScrollResult(uiModel: UiModel, scrollResult: ScrollResult): UiModel {
-        val uiModelBuilder = UiModel.UiModelBuilder(uiModel)
-
         when (scrollResult.type) {
             Result.IN_FLIGHT ->
                 //In Progress
-                uiModelBuilder
-                        .setFirstTimeLoad(scrollResult.pageNumber == 1)
-                        .setFailureMsg("")
-                        .setPageNumber(scrollResult.pageNumber)
-                        .setEnableScrollListener(false)
-                        .setResultList(emptyList())
-                        .setAdapterCommandType(if (scrollResult.pageNumber == 1)
+                return UiModel(
+                        firstTimeLoad = scrollResult.pageNumber == 1,
+                        pageNumber = scrollResult.pageNumber,
+                        currentList = uiModel.currentList,
+                        adapterCommandType = if (scrollResult.pageNumber == 1)
                             AdapterCommand.DO_NOTHING
                         else
-                            AdapterCommand.SHOW_IN_PROGRESS)
+                            AdapterCommand.SHOW_IN_PROGRESS
+                )
             Result.SUCCESS -> {
                 val listToAdd = translateResultsForUi(scrollResult.result!!)
                 val currentList: MutableList<MovieViewInfo> = uiModel.currentList.toMutableList()
                 currentList.addAll(listToAdd)
 
                 //Success
-                uiModelBuilder
-                        .setFirstTimeLoad(false)
-                        .setFailureMsg("")
-                        .setPageNumber(scrollResult.pageNumber)
-                        .setEnableScrollListener(true)
-                        .setCurrentList(currentList)
-                        .setResultList(listToAdd)
-                        .setAdapterCommandType(AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS)
+                return UiModel(
+                        firstTimeLoad = false,
+                        pageNumber = scrollResult.pageNumber,
+                        enableScrollListener = true,
+                        currentList = currentList,
+                        resultList = listToAdd,
+                        adapterCommandType = AdapterCommand.ADD_DATA_REMOVE_IN_PROGRESS
+                )
             }
             Result.FAILURE -> {
                 Timber.e(scrollResult.error)
 
                 //Failure
-                uiModelBuilder
-                        .setFirstTimeLoad(scrollResult.pageNumber == 1)
-                        .setFailureMsg(application.getString(R.string.error_msg))
-                        .setPageNumber(scrollResult.pageNumber - 1)
-                        .setEnableScrollListener(false)
-                        .setResultList(emptyList())
-                        .setAdapterCommandType(AdapterCommand.DO_NOTHING)
+                return UiModel(
+                        firstTimeLoad = scrollResult.pageNumber == 1,
+                        currentList = uiModel.currentList,
+                        failureMsg = application.getString(R.string.error_msg),
+                        pageNumber = scrollResult.pageNumber - 1,
+                        adapterCommandType = AdapterCommand.DO_NOTHING
+                )
             }
             else ->
                 //Unknown result - throw error
                 throw IllegalArgumentException("Unknown ResultType: " + scrollResult.type)
         }
-
-        return uiModelBuilder.createUiModel()
     }
 
     /**
@@ -305,8 +300,6 @@ open class NowPlayingViewModel @Inject constructor(
      * @return new updated [UiModel]
      */
     private fun processRestoreResult(uiModel: UiModel, restoreResult: RestoreResult): UiModel {
-        val uiModelBuilder = UiModel.UiModelBuilder(uiModel)
-
         var listToAdd: List<MovieViewInfo> = emptyList()
         val currentList: MutableList<MovieViewInfo> = uiModel.currentList.toMutableList()
 
@@ -318,45 +311,42 @@ open class NowPlayingViewModel @Inject constructor(
         when (restoreResult.type) {
             Result.IN_FLIGHT ->
                 //In Progress
-                uiModelBuilder
-                        .setFirstTimeLoad(true)
-                        .setFailureMsg("")
-                        .setPageNumber(restoreResult.pageNumber)
-                        .setEnableScrollListener(false)
-                        .setCurrentList(currentList)
-                        .setResultList(listToAdd)
-                        .setAdapterCommandType(if (listToAdd.isEmpty())
+                return UiModel(
+                        firstTimeLoad = true,
+                        pageNumber = restoreResult.pageNumber,
+                        currentList = currentList,
+                        resultList = listToAdd,
+                        adapterCommandType = if (listToAdd.isEmpty())
                             AdapterCommand.DO_NOTHING
                         else
-                            AdapterCommand.ADD_DATA_ONLY)
+                            AdapterCommand.ADD_DATA_ONLY
+                )
             Result.SUCCESS ->
                 //Success
-                uiModelBuilder
-                        .setFirstTimeLoad(false)
-                        .setFailureMsg("")
-                        .setPageNumber(restoreResult.pageNumber)
-                        .setEnableScrollListener(true)
-                        .setCurrentList(currentList)
-                        .setResultList(listToAdd)
-                        .setAdapterCommandType(AdapterCommand.ADD_DATA_ONLY)
+                return UiModel(
+                        firstTimeLoad = false,
+                        pageNumber = restoreResult.pageNumber,
+                        enableScrollListener = true,
+                        currentList = currentList,
+                        resultList = listToAdd,
+                        adapterCommandType = AdapterCommand.ADD_DATA_ONLY
+                )
             Result.FAILURE -> {
                 Timber.e(restoreResult.error)
 
                 //Error
-                uiModelBuilder
-                        .setFirstTimeLoad(true)
-                        .setFailureMsg(application.getString(R.string.error_msg))
-                        .setPageNumber(restoreResult.pageNumber - 1)
-                        .setEnableScrollListener(false)
-                        .setResultList(emptyList())
-                        .setAdapterCommandType(AdapterCommand.DO_NOTHING)
+                return UiModel(
+                        firstTimeLoad = true,
+                        currentList = uiModel.currentList,
+                        failureMsg = application.getString(R.string.error_msg),
+                        pageNumber = restoreResult.pageNumber - 1,
+                        adapterCommandType = AdapterCommand.DO_NOTHING
+                )
             }
             else ->
                 //Unknown result - throw error
                 throw IllegalArgumentException("Unknown ResultType: " + restoreResult.type)
         }
-
-        return uiModelBuilder.createUiModel()
     }
 
     /**
@@ -366,17 +356,27 @@ open class NowPlayingViewModel @Inject constructor(
      * @return new updated [UiModel]
      */
     private fun processFilterResult(uiModel: UiModel, filterResult: FilterResult): UiModel {
-        val uiModelBuilder = UiModel.UiModelBuilder(uiModel)
-
         when (filterResult.type) {
-            Result.IN_FLIGHT -> Timber.i("Filter - IN_FLIGHT")
+            Result.IN_FLIGHT -> {
+                Timber.i("Filter - IN_FLIGHT")
+                return UiModel(
+                        firstTimeLoad = uiModel.isFirstTimeLoad,
+                        pageNumber = uiModel.pageNumber,
+                        currentList = uiModel.currentList,
+                        filterOn = uiModel.isFilterOn,
+                        enableScrollListener = uiModel.isEnableScrollListener
+                )
+            }
             Result.SUCCESS ->
                 //Success
-                uiModelBuilder
-                        .setCurrentList(translateResultsForUi(filterResult.filteredList!!))
-                        .setFilterOn(filterResult.isFilterOn)
-                        .setResultList(emptyList())
-                        .setAdapterCommandType(AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER)
+                return UiModel(
+                        firstTimeLoad = false,
+                        pageNumber = uiModel.pageNumber,
+                        currentList = translateResultsForUi(filterResult.filteredList!!),
+                        filterOn = filterResult.isFilterOn,
+                        enableScrollListener = uiModel.isEnableScrollListener,
+                        adapterCommandType = AdapterCommand.SWAP_LIST_DUE_TO_NEW_FILTER
+                )
             Result.FAILURE -> {
                 Timber.e("Failure during filter. Throw error, this should never happen.")
                 throw IllegalArgumentException("Failure during filter. This should never happen.")
@@ -385,7 +385,5 @@ open class NowPlayingViewModel @Inject constructor(
                 //Unknown result - throw error
                 throw IllegalArgumentException("Unknown ResultType: " + filterResult.type)
         }
-
-        return uiModelBuilder.createUiModel()
     }
 }

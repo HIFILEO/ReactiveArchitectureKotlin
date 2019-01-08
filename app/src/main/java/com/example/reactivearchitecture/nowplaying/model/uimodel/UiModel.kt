@@ -39,6 +39,10 @@ class UiModel : Parcelable {
     @AdapterCommand.AdapterCommandType var adapterCommandType: Int
     var isFilterOn: Boolean
 
+    /**
+     * Construct class using android [Parcelable]
+     * @param in - [Parcelable]
+     */
     protected constructor(`in`: Parcel) {
         this.isFirstTimeLoad = false
         this.failureMsg = ""
@@ -50,15 +54,26 @@ class UiModel : Parcelable {
         this.isFilterOn = `in`.readByte().toInt() != 0
     }
 
-    private constructor(
-        firstTimeLoad: Boolean,
-        failureMsg: String,
-        pageNumber: Int,
-        enableScrollListener: Boolean,
-        currentList: List<MovieViewInfo>,
-        resultList: List<MovieViewInfo>,
-        adapterCommandType: Int,
-        filterOn: Boolean
+    /**
+     * Construct class
+     * @param firstTimeLoad - true if first time loading, false otherwise
+     * @param failureMsg - failure message to show user, empty otherwise
+     * @param pageNumber - current loaded page number, 0 otherwise
+     * @param enableScrollListener - scroll listener is enabled, false otherwise
+     * @param currentList - current data to show in adapter, empty otherwise
+     * @param resultList - result of loading new data, empty otherwise
+     * @param adapterCommandType - the latest command issued by the adapter. DO_NOTHING otherwise.
+     * @param filterOn - is the filter on? false otherwise
+     */
+    constructor(
+        firstTimeLoad: Boolean = true,
+        failureMsg: String = "",
+        pageNumber: Int = 0,
+        enableScrollListener: Boolean = false,
+        currentList: List<MovieViewInfo> = emptyList(),
+        resultList: List<MovieViewInfo> = emptyList(),
+        adapterCommandType: Int = AdapterCommand.DO_NOTHING,
+        filterOn: Boolean = false
     ) {
         this.isFirstTimeLoad = firstTimeLoad
         this.failureMsg = failureMsg
@@ -78,102 +93,6 @@ class UiModel : Parcelable {
         // only care about pageNumber when saving state
         parcel.writeInt(pageNumber)
         parcel.writeByte((if (isFilterOn) 1 else 0).toByte())
-    }
-
-    /**
-     * Too many state? Too many params in constructors? Call on the builder pattern to Save The Day!.
-     * TODO - get rid of builder pattern and use named parameters
-     */
-    class UiModelBuilder {
-        private val uiModel: UiModel?
-
-        private var firstTimeLoad: Boolean = false
-        private var failureMsg: String = ""
-        private var pageNumber: Int = 0
-        private var enableScrollListener: Boolean = false
-        private var currentList: List<MovieViewInfo> = emptyList()
-        private var resultList: List<MovieViewInfo> = emptyList()
-        @AdapterCommand.AdapterCommandType
-        private var adapterCommandType: Int = 0
-        private var filterOn: Boolean = false
-
-        /**
-         * Construct Builder using defaults from previous [UiModel].
-         * @param uiModel - model for builder to use.
-         */
-        constructor(uiModel: UiModel) {
-            this.uiModel = uiModel
-
-            this.firstTimeLoad = uiModel.isFirstTimeLoad
-            this.failureMsg = uiModel.failureMsg
-            this.pageNumber = uiModel.pageNumber
-            this.enableScrollListener = uiModel.isEnableScrollListener
-            this.currentList = uiModel.currentList
-            this.resultList = uiModel.resultList
-            this.adapterCommandType = uiModel.adapterCommandType
-            this.filterOn = uiModel.isFilterOn
-        }
-
-        constructor() {
-            this.uiModel = null
-        }
-
-        /**
-         * Create the [UiModel] using the types in [UiModelBuilder].
-         * @return new [UiModel].
-         */
-        fun createUiModel(): UiModel {
-
-            return UiModel(
-                    firstTimeLoad,
-                    failureMsg,
-                    pageNumber,
-                    enableScrollListener,
-                    currentList,
-                    resultList,
-                    adapterCommandType,
-                    filterOn)
-        }
-
-        fun setFirstTimeLoad(firstTimeLoad: Boolean): UiModelBuilder {
-            this.firstTimeLoad = firstTimeLoad
-            return this
-        }
-
-        fun setFailureMsg(failureMsg: String): UiModelBuilder {
-            this.failureMsg = failureMsg
-            return this
-        }
-
-        fun setPageNumber(pageNumber: Int): UiModelBuilder {
-            this.pageNumber = pageNumber
-            return this
-        }
-
-        fun setEnableScrollListener(enableScrollListener: Boolean): UiModelBuilder {
-            this.enableScrollListener = enableScrollListener
-            return this
-        }
-
-        fun setCurrentList(currentList: List<MovieViewInfo>): UiModelBuilder {
-            this.currentList = currentList
-            return this
-        }
-
-        fun setResultList(resultList: List<MovieViewInfo>): UiModelBuilder {
-            this.resultList = resultList
-            return this
-        }
-
-        fun setAdapterCommandType(adapterCommandType: Int): UiModelBuilder {
-            this.adapterCommandType = adapterCommandType
-            return this
-        }
-
-        fun setFilterOn(filterOn: Boolean): UiModelBuilder {
-            this.filterOn = filterOn
-            return this
-        }
     }
 
     companion object {
