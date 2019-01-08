@@ -35,8 +35,8 @@ class ScrollResult(
     val isSuccessful: Boolean,
     val isLoading: Boolean,
     val pageNumber: Int,
-    val result: List<MovieInfo>?,
-    val error: Throwable?
+    val result: List<MovieInfo>,
+    val error: Throwable? // TODO - Arrow?
 ) : Result() {
 
     /**
@@ -50,7 +50,7 @@ class ScrollResult(
                     false,
                     true,
                     pageNumber,
-                    null,
+                    emptyList(),
                     null)
         }
 
@@ -71,7 +71,7 @@ class ScrollResult(
                     false,
                     false,
                     pageNumber,
-                    null,
+                    emptyList(),
                     error
             )
         }

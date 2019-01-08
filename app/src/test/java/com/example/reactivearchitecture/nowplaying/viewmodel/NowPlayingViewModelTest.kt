@@ -264,10 +264,9 @@ class NowPlayingViewModelTest : RxJavaTest() {
         // restore activity
         val pageNumber = 2
 
-        val uiModelBuilder = UiModel.UiModelBuilder(UiModel.initState())
-        uiModelBuilder.setPageNumber(pageNumber)
-
-        val restoreState = uiModelBuilder.createUiModel()
+        val restoreState = UiModel(
+                pageNumber = pageNumber
+        )
         nowPlayingViewModel.init(restoreState)
 
         // Fake Data from Restore
@@ -421,16 +420,27 @@ class NowPlayingViewModelTest : RxJavaTest() {
         movieViewInfoList.addAll(movieViewInfoList_LowRating)
         movieViewInfoList.addAll(movieViewInfoList_HighRating)
 
-        val uiModelBuilder = UiModel.UiModelBuilder(UiModel.initState())
-        uiModelBuilder.setPageNumber(2)
-        uiModelBuilder.setCurrentList(movieViewInfoList)
-        uiModelBuilder.setFilterOn(false)
-        uiModelBuilder.setEnableScrollListener(true)
-        uiModelBuilder.setFirstTimeLoad(false)
-        uiModelBuilder.setResultList(emptyList())
-        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
-
-        nowPlayingViewModel.init(uiModelBuilder.createUiModel())
+        nowPlayingViewModel.init(
+                UiModel(
+                        pageNumber = 2,
+                        currentList = movieViewInfoList,
+                        filterOn = false,
+                        enableScrollListener = true,
+                        firstTimeLoad = false,
+                        resultList = emptyList(),
+                        adapterCommandType = AdapterCommand.DO_NOTHING
+                )
+        )
+//        val uiModelBuilder = UiModel.UiModelBuilder(UiModel.initState())
+//        uiModelBuilder.setPageNumber(2)
+//        uiModelBuilder.setCurrentList(movieViewInfoList)
+//        uiModelBuilder.setFilterOn(false)
+//        uiModelBuilder.setEnableScrollListener(true)
+//        uiModelBuilder.setFirstTimeLoad(false)
+//        uiModelBuilder.setResultList(emptyList())
+//        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
+//
+//        nowPlayingViewModel.init(uiModelBuilder.createUiModel())
 
         // Fake Data from FilterResult
         val filterResult = FilterResult.success(true, movieInfoList_HighRating)
@@ -516,16 +526,27 @@ class NowPlayingViewModelTest : RxJavaTest() {
         movieInfoList.addAll(movieInfoList_HighRating)
         movieInfoList.addAll(movieInfoList_LowRating)
 
-        val uiModelBuilder = UiModel.UiModelBuilder(UiModel.initState())
-        uiModelBuilder.setPageNumber(2)
-        uiModelBuilder.setCurrentList(movieViewInfoList)
-        uiModelBuilder.setFilterOn(false)
-        uiModelBuilder.setEnableScrollListener(true)
-        uiModelBuilder.setFirstTimeLoad(false)
-        uiModelBuilder.setResultList(emptyList())
-        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
-
-        nowPlayingViewModel.init(uiModelBuilder.createUiModel())
+        nowPlayingViewModel.init(
+                UiModel(
+                        pageNumber = 2,
+                        currentList = movieViewInfoList,
+                        filterOn = false,
+                        enableScrollListener = true,
+                        firstTimeLoad = false,
+                        resultList = emptyList(),
+                        adapterCommandType = AdapterCommand.DO_NOTHING
+                )
+        )
+//        val uiModelBuilder = UiModel.UiModelBuilder(UiModel.initState())
+//        uiModelBuilder.setPageNumber(2)
+//        uiModelBuilder.setCurrentList(movieViewInfoList)
+//        uiModelBuilder.setFilterOn(false)
+//        uiModelBuilder.setEnableScrollListener(true)
+//        uiModelBuilder.setFirstTimeLoad(false)
+//        uiModelBuilder.setResultList(emptyList())
+//        uiModelBuilder.setAdapterCommandType(AdapterCommand.DO_NOTHING)
+//
+//        nowPlayingViewModel.init(uiModelBuilder.createUiModel())
 
         // Fake Data from FilterResult
         val filterResultOn = FilterResult.success(true, movieInfoList_HighRating)
