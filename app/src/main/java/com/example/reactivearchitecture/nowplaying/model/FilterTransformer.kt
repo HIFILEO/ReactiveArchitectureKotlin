@@ -69,8 +69,8 @@ class FilterTransformer(private val filterManager: FilterManager) {
 
     val transformFilterActionToFilterResult: ObservableTransformer<FilterAction, FilterResult> =
         ObservableTransformer { upstream ->
-            upstream.map { filterAcrtion: FilterAction ->
-                filterManager.isFilterOn = filterAcrtion.isFilterOn
+            upstream.map { filterAction: FilterAction ->
+                filterManager.isFilterOn = filterAction.isFilterOn
 
                 FilterResult.success(
                         filterManager.isFilterOn,

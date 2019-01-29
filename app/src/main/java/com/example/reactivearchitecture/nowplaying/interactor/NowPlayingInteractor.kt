@@ -21,11 +21,11 @@ package com.example.reactivearchitecture.nowplaying.interactor
 
 import android.support.annotation.VisibleForTesting
 
-import com.example.reactivearchitecture.core.model.action.Action
 import com.example.reactivearchitecture.nowplaying.controller.ServiceController
 import com.example.reactivearchitecture.nowplaying.model.FilterTransformer
 import com.example.reactivearchitecture.nowplaying.model.MovieInfo
 import com.example.reactivearchitecture.nowplaying.model.NowPlayingInfo
+import com.example.reactivearchitecture.nowplaying.model.action.Action
 import com.example.reactivearchitecture.nowplaying.model.action.FilterAction
 import com.example.reactivearchitecture.nowplaying.model.action.RestoreAction
 import com.example.reactivearchitecture.nowplaying.model.action.ScrollAction

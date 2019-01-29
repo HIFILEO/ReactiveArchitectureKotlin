@@ -8,11 +8,11 @@ import com.example.reactivearchitecture.nowplaying.interactor.NowPlayingInteract
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfo
 import com.example.reactivearchitecture.nowplaying.view.MovieViewInfoImpl
 import com.example.reactivearchitecture.nowplaying.model.uimodel.UiModel
-import com.example.reactivearchitecture.core.model.action.Action
 import com.example.reactivearchitecture.nowplaying.model.AdapterCommand
 import com.example.reactivearchitecture.nowplaying.model.FilterManager
 import com.example.reactivearchitecture.nowplaying.model.MovieInfo
 import com.example.reactivearchitecture.nowplaying.model.MovieInfoImpl
+import com.example.reactivearchitecture.nowplaying.model.action.Action
 import com.example.reactivearchitecture.nowplaying.model.action.ScrollAction
 import com.example.reactivearchitecture.nowplaying.model.result.FilterResult
 import com.example.reactivearchitecture.nowplaying.model.result.RestoreResult
@@ -486,7 +486,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
         // check values
-        val movieViewInfo = uiModel.currentList!![0]
+        val movieViewInfo = uiModel.currentList[0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
