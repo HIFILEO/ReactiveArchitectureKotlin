@@ -212,10 +212,6 @@ open class NowPlayingViewModel @Inject constructor(
                         is ScrollResult ->  return@scan processScrollResult(uiModel, result)
                         is RestoreResult -> return@scan processRestoreResult(uiModel, result)
                         is FilterResult -> return@scan processFilterResult(uiModel, result)
-                        else -> {
-                            //Unknown result - throw error
-                            throw IllegalArgumentException("Unknown Result: $result")
-                        }
                     }
                 }
                 //Publish results to main thread.
