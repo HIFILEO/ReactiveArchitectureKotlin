@@ -25,16 +25,15 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.support.annotation.VisibleForTesting
 import android.support.annotation.WorkerThread
-import android.widget.Adapter
 
 import com.example.reactivearchitecture.R
-import com.example.reactivearchitecture.core.model.action.Action
 import com.example.reactivearchitecture.nowplaying.controller.ServiceController
 import com.example.reactivearchitecture.nowplaying.interactor.NowPlayingInteractor
 import com.example.reactivearchitecture.nowplaying.model.AdapterCommand
 import com.example.reactivearchitecture.nowplaying.model.FilterManager
 import com.example.reactivearchitecture.nowplaying.model.FilterTransformer
 import com.example.reactivearchitecture.nowplaying.model.MovieInfo
+import com.example.reactivearchitecture.nowplaying.model.action.Action
 
 
 import com.example.reactivearchitecture.nowplaying.model.action.FilterAction
