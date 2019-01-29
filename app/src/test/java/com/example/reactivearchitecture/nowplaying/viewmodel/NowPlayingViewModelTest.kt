@@ -486,7 +486,7 @@ class NowPlayingViewModelTest : RxJavaTest() {
         assertThat(uiModel.pageNumber).isEqualTo(2)
 
         // check values
-        val movieViewInfo = uiModel.currentList!![0]
+        val movieViewInfo = uiModel.currentList[0]
         assertThat(movieViewInfo.pictureUrl).isEqualToIgnoringCase(movieInfo.pictureUrl)
         assertThat(movieViewInfo.title).isEqualToIgnoringCase(movieInfo.title)
         assertThat(movieViewInfo.rating).isEqualToIgnoringCase(Math.round(movieInfo.rating)
