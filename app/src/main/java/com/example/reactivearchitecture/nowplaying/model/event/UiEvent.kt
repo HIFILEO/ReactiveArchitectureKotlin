@@ -22,4 +22,10 @@ package com.example.reactivearchitecture.nowplaying.model.event
 /**
  * Base class for UiEvents.
  */
-abstract class UiEvent
+sealed class UiEvent
+
+data class FilterEvent(val isFilterOn: Boolean) : UiEvent()
+
+data class RestoreEvent(val pageNumber: Int) : UiEvent()
+
+data class ScrollEvent(val pageNumber: Int = 0) : UiEvent()
